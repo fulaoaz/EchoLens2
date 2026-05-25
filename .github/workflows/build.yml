@@ -16,19 +16,9 @@ permissions:
   packages: write
 
 jobs:
-  build-tauri-preview:
-    name: Build Tauri Preview (${{ matrix.platform }})
-    runs-on: ${{ matrix.platform }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - platform: 'macos-latest'
-            args: '--target universal-apple-darwin'
-          - platform: 'ubuntu-22.04'
-            args: ''
-          - platform: 'windows-latest'
-            args: ''
+  build-windows:
+    name: Build Windows (Tauri)
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -41,14 +31,6 @@ jobs:
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
-
-      - name: Install dependencies (Ubuntu only)
-        if: matrix.platform == 'ubuntu-22.04'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.0-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
       - name: Install frontend dependencies
         working-directory: frontend
@@ -60,19 +42,65 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           projectPath: frontend
-          args: ${{ matrix.args }}
 
-      - name: Upload artifacts
+      - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: tauri-${{ matrix.platform }}
+          name: windows-tauri
           path: |
-            frontend/src-tauri/target/release/bundle/**/*
+            frontend/src-tauri/target/release/bundle/**/*.msi
+            frontend/src-tauri/target/release/bundle/**/*.exe
+          retention-days: 7
+
+  build-android:
+    name: Build Android (Capacitor)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build web app
+        working-directory: frontend
+        run: npm run build
+
+      - name: Sync Capacitor
+        working-directory: frontend
+        run: npx cap sync android
+
+      - name: Build Android APK
+        working-directory: frontend/android
+        run: ./gradlew assembleRelease
+
+      - name: Upload Android artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-capacitor
+          path: |
+            frontend/android/app/build/outputs/apk/release/*.apk
           retention-days: 7
 
   summary:
     name: Build Summary
-    needs: build-tauri-preview
+    needs: [build-windows, build-android]
     runs-on: ubuntu-latest
     steps:
       - name: Summary
@@ -82,9 +110,12 @@ jobs:
           echo "跨平台客户端已构建完成，可在 Artifacts 中下载。" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 📦 可用平台" >> $GITHUB_STEP_SUMMARY
-          echo "- Windows: .msi 安装包" >> $GITHUB_STEP_SUMMARY
-          echo "- macOS: .dmg 安装包 (Universal)" >> $GITHUB_STEP_SUMMARY
-          echo "- Linux: .AppImage 安装包" >> $GITHUB_STEP_SUMMARY
+          echo "- **Windows**: .msi 安装包（Tauri 桌面端）" >> $GITHUB_STEP_SUMMARY
+          echo "- **Android**: .apk 安装包（Capacitor 移动端）" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📝 注意事项" >> $GITHUB_STEP_SUMMARY
+          echo "- Android APK 为 debug 签名，仅供测试" >> $GITHUB_STEP_SUMMARY
+          echo "- 正式发布需要配置签名密钥" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 🚀 创建正式 Release" >> $GITHUB_STEP_SUMMARY
           echo "如需创建正式 Release，请运行：" >> $GITHUB_STEP_SUMMARY

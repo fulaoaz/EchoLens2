@@ -49,29 +49,18 @@ jobs:
 
             ### 📦 下载
 
-            - **Windows**: `EchoLens_${{ steps.get_version.outputs.version }}_x64_en-US.msi`
-            - **macOS**: `EchoLens_${{ steps.get_version.outputs.version }}_universal.dmg`
-            - **Linux**: `echolens_${{ steps.get_version.outputs.version }}_amd64.AppImage`
+            - **Windows**: `EchoLens_${{ steps.get_version.outputs.version }}_x64.msi` (Tauri 桌面端)
+            - **Android**: `EchoLens_${{ steps.get_version.outputs.version }}.apk` (Capacitor 移动端)
             - **Docker**: `ghcr.io/zuohenlin/echolens2:${{ steps.get_version.outputs.version }}`
 
             ### 📝 更新日志
 
             详见 [CHANGELOG.md](https://github.com/zuohenlin/EchoLens2/blob/master/CHANGELOG.md)
 
-  build-tauri:
-    name: Build Tauri (${{ matrix.platform }})
+  build-windows:
+    name: Build Windows (Tauri)
     needs: create-release
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - platform: 'macos-latest'
-            args: '--target universal-apple-darwin'
-          - platform: 'ubuntu-22.04'
-            args: ''
-          - platform: 'windows-latest'
-            args: ''
-    runs-on: ${{ matrix.platform }}
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -84,14 +73,6 @@ jobs:
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
-
-      - name: Install dependencies (Ubuntu only)
-        if: matrix.platform == 'ubuntu-22.04'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.0-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
       - name: Install frontend dependencies
         working-directory: frontend
@@ -108,7 +89,55 @@ jobs:
           releaseBody: 'See the assets to download and install this version.'
           releaseDraft: false
           prerelease: ${{ contains(needs.create-release.outputs.version, 'rc') || contains(needs.create-release.outputs.version, 'beta') || contains(needs.create-release.outputs.version, 'alpha') }}
-          args: ${{ matrix.args }}
+
+  build-android:
+    name: Build Android (Capacitor)
+    needs: create-release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build web app
+        working-directory: frontend
+        run: npm run build
+
+      - name: Sync Capacitor
+        working-directory: frontend
+        run: npx cap sync android
+
+      - name: Build Android APK
+        working-directory: frontend/android
+        run: ./gradlew assembleRelease
+
+      - name: Upload Android APK to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create-release.outputs.upload_url }}
+          asset_path: frontend/android/app/build/outputs/apk/release/app-release.apk
+          asset_name: EchoLens_${{ needs.create-release.outputs.version }}.apk
+          asset_content_type: application/vnd.android.package-archive
 
   build-docker:
     name: Build and Push Docker Images
