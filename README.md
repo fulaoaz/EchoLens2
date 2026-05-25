@@ -418,7 +418,7 @@ npm run dev
 > 🚧 演示环境正在准备中，敬请期待...
 
 **演示账号**（即将开放）：
-- 用户名：`demo@echolens.ai`
+- 用户名：`demo`
 - 密码：`demo123`
 
 **演示数据**：
@@ -765,18 +765,18 @@ EchoLens 2.0 的开发离不开以下优秀的开源项目：
 
 ## 📊 项目统计
 
-![GitHub stars](https://img.shields.io/github/stars/yourusername/echolens?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/echolens?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/yourusername/echolens?style=social)
+![GitHub stars](https://img.shields.io/github/stars/zuohenlin/EchoLens2?style=social)
+![GitHub forks](https://img.shields.io/github/forks/zuohenlin/EchoLens2?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/zuohenlin/EchoLens2?style=social)
 
-![GitHub issues](https://img.shields.io/github/issues/yourusername/echolens)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/yourusername/echolens)
-![GitHub contributors](https://img.shields.io/github/contributors/yourusername/echolens)
-![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/echolens)
+![GitHub issues](https://img.shields.io/github/issues/zuohenlin/EchoLens2)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/zuohenlin/EchoLens2)
+![GitHub contributors](https://img.shields.io/github/contributors/zuohenlin/EchoLens2)
+![GitHub last commit](https://img.shields.io/github/last-commit/zuohenlin/EchoLens2)
 
-![GitHub code size](https://img.shields.io/github/languages/code-size/yourusername/echolens)
-![GitHub repo size](https://img.shields.io/github/repo-size/yourusername/echolens)
-![Lines of code](https://img.shields.io/tokei/lines/github/yourusername/echolens)
+![GitHub code size](https://img.shields.io/github/languages/code-size/zuohenlin/EchoLens2)
+![GitHub repo size](https://img.shields.io/github/repo-size/zuohenlin/EchoLens2)
+![Lines of code](https://img.shields.io/tokei/lines/github/zuohenlin/EchoLens2)
 
 ---
 

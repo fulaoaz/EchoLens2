@@ -17,7 +17,7 @@
 
 ### 报告流程
 
-1. **发送邮件**至 security@echolens.ai，包含：
+1. **发送邮件**至 fulaoaz@qq.com，包含：
    - 漏洞描述
    - 复现步骤
    - 影响范围
@@ -457,14 +457,14 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
 订阅安全更新：
 
 - **GitHub Watch**：Watch 仓库并选择 "Releases only"
-- **邮件列表**：发送邮件至 security-subscribe@echolens.ai
+- **邮件列表**：发送邮件至 fulaoaz@qq.com
 - **RSS Feed**：订阅 GitHub Releases RSS
 
 ---
 
 ## 联系方式
 
-- **安全问题报告**：security@echolens.ai
+- **安全问题报告**：fulaoaz@qq.com
 - **一般问题**：fulaoaz@qq.com
 - **GitHub Issues**：https://github.com/yourusername/echolens/issues
 

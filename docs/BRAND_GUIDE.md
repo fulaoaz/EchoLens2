@@ -386,8 +386,8 @@ frontend/ios/App/App/Assets.xcassets/
 
 如有品牌使用相关问题，请联系：
 
-- **邮件**：brand@echolens.ai
-- **GitHub**：https://github.com/yourusername/echolens
+- **邮件**：fulaoaz@qq.com
+- **GitHub**：https://github.com/zuohenlin/EchoLens2
 
 ---
 

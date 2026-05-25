@@ -331,8 +331,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[2.0.0-rc1]: https://github.com/yourusername/echolens/compare/v2.0.0-beta...v2.0.0-rc1
-[2.0.0-beta]: https://github.com/yourusername/echolens/compare/v2.0.0-alpha...v2.0.0-beta
-[2.0.0-alpha]: https://github.com/yourusername/echolens/compare/v1.0.0...v2.0.0-alpha
-[1.0.0]: https://github.com/yourusername/echolens/releases/tag/v1.0.0
-[Unreleased]: https://github.com/yourusername/echolens/compare/v2.0.0-rc1...HEAD
+[2.0.0-rc1]: https://github.com/zuohenlin/EchoLens2/compare/v2.0.0-beta...v2.0.0-rc1
+[2.0.0-beta]: https://github.com/zuohenlin/EchoLens2/compare/v2.0.0-alpha...v2.0.0-beta
+[2.0.0-alpha]: https://github.com/zuohenlin/EchoLens2/compare/v1.0.0...v2.0.0-alpha
+[1.0.0]: https://github.com/zuohenlin/EchoLens2/releases/tag/v1.0.0
+[Unreleased]: https://github.com/zuohenlin/EchoLens2/compare/v2.0.0-rc1...HEAD
