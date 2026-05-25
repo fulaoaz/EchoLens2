@@ -1,7 +1,34 @@
 node_modules
 dist
+dist-ssr
 .vite
-.git
+.cache
 *.log
 .eslintcache
 coverage
+.DS_Store
+*.local
+
+# Repo metadata
+.git
+.gitignore
+.dockerignore
+
+# Test artifacts
+playwright-report/
+test-results/
+e2e/downloads/
+.playwright/
+
+# Build artifacts
+android/
+ios/
+.capacitor/
+src-tauri/target/
+src-tauri/gen/
+
+# Environment
+.env
+.env.*
+!.env.example
+

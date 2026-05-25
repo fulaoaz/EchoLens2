@@ -1,240 +1,385 @@
-# EchoLens 2.0 — Deployment & Cross-Platform Guide
+# EchoLens 2.0 部署指南
 
-EchoLens 是 Flask 3 后端 + Vue 3 前端的双进程应用。本文档覆盖 4 条交付路线：
+## 部署方式
 
-1. **Docker Compose**（生产，单台主机）
-2. **Web 静态部署**（前端走 CDN，后端走 K8s / VM）
-3. **Tauri Desktop**（Windows / macOS / Linux 桌面包，scaffold 已就位）
-4. **Capacitor Android**（Android APK / AAB，scaffold 已就位）
+EchoLens 2.0 支持多种部署方式：
 
-iOS 不在本里程碑范围内。
+### 1. Docker Compose 部署（推荐）
 
----
-
-## 0. 前置：环境变量
-
-后端 `.env`（部署到容器或 systemd 时通过 secret 注入，**不可入 git**）：
-
-```
-LLM_API_KEY=
-LLM_BASE_URL=https://api.openai.com/v1
-LLM_MODEL_NAME=gpt-4o-mini
-KUZU_DB_PATH=/var/lib/echolens/kuzu_db
-DUCKDB_PATH=/var/lib/echolens/echolens.duckdb
-UPLOAD_DIR=/var/lib/echolens/uploads
-LOG_LEVEL=INFO
-```
-
-前端构建期变量：
-
-| 变量 | 取值 | 作用 |
-|---|---|---|
-| `VITE_BUILD_TARGET` | `web` (默认) / `tauri` / `capacitor` | 控制 `vite.config.ts` 的 `base` —— web 用 `/`，桌面/移动用 `./` |
-
----
-
-## 1. Docker Compose（推荐：单机生产）
+最简单的部署方式，适合生产环境。
 
 ```bash
-docker compose up -d --build
-```
+# 克隆仓库
+git clone https://github.com/your-org/echolens2.git
+cd echolens2
 
-- 后端：`backend/Dockerfile` → Flask + gunicorn，绑定 5001。
-- 前端：`frontend/Dockerfile` → 多阶段，`npm run build` + nginx。
-- 持久卷：`./data/kuzu_db`、`./data/duckdb`、`./data/uploads`。
+# 配置环境变量
+cp .env.example .env
+# 编辑 .env 文件，填入必要的 API Key
 
-升级流程：
-
-```bash
-git pull
-docker compose build
+# 启动服务
 docker compose up -d
+
+# 查看日志
+docker compose logs -f
+
+# 停止服务
+docker compose down
 ```
 
-回滚：保留上一份镜像 tag，`docker compose up -d` 时切回旧 tag 即可。
+访问 http://localhost:3000
 
----
+### 2. 本地开发部署
 
-## 2. Web 静态部署
+适合开发和调试。
 
-### 2.1 前端
-
-```bash
-cd frontend
-VITE_BUILD_TARGET=web npm run build      # 默认即 web
-# dist/ 直接上传 CDN / nginx / S3+CloudFront
-```
-
-`nginx.conf`（仓库已含基础版）：
-
-```nginx
-location / {
-  try_files $uri $uri/ /index.html;
-}
-location /api/ {
-  proxy_pass http://backend:5001;
-  proxy_set_header Host $host;
-  proxy_set_header X-Real-IP $remote_addr;
-}
-```
-
-### 2.2 后端
-
-任意 Python 3.12 运行时即可。生产建议：
+#### 后端
 
 ```bash
 cd backend
-.venv/bin/python -m gunicorn 'app:create_app()' \
-  --workers 2 --threads 4 --bind 0.0.0.0:5001 \
-  --access-logfile - --error-logfile -
+
+# 创建虚拟环境
+uv venv .venv
+
+# 安装依赖
+uv pip install --python .venv/Scripts/python.exe -e ".[dev]"
+
+# 配置环境变量
+cp .env.example .env
+# 编辑 .env 文件
+
+# 运行测试
+.venv/Scripts/python -m pytest -q
+
+# 启动后端
+.venv/Scripts/python run.py
 ```
 
-K8s 部署：参考 `docker-compose.yml` 的 backend service，转成 Deployment + Service + 持久 PVC（DuckDB / kuzu_db / uploads）。
+后端运行在 http://localhost:5001
 
----
-
-## 3. Tauri Desktop
-
-### 3.1 一次性环境
-
-```bash
-# Rust toolchain
-rustup default stable
-# Tauri CLI
-cargo install tauri-cli --version "^2.0"
-# 前端依赖
-cd frontend
-npm install -D @tauri-apps/cli@^2.0 @tauri-apps/api@^2.0
-# Windows: 安装 WebView2 runtime（系统级）
-# Linux:  apt install libwebkit2gtk-4.1-dev build-essential curl wget file libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev
-# macOS:  xcode-select --install
-```
-
-### 3.2 开发
+#### 前端
 
 ```bash
 cd frontend
-npx tauri dev
-# 自动跑 npm run dev (Vite)，并把 webview 嵌进 Tauri 窗口
+
+# 安装依赖
+npm install
+
+# 运行测试
+npm run test
+npm run test:e2e
+
+# 启动开发服务器
+npm run dev
 ```
 
-### 3.3 生产打包
+前端运行在 http://localhost:3000
+
+### 3. 桌面应用部署（Tauri）
+
+构建跨平台桌面应用。
+
+#### 环境要求
+
+- **Rust**: >= 1.70
+- **Node.js**: >= 18
+- **Windows**: WebView2 Runtime
+- **macOS**: macOS 10.15+
+- **Linux**: webkit2gtk, libayatana-appindicator
+
+#### 安装 Rust
+
+```bash
+# Windows
+winget install Rustlang.Rustup
+
+# macOS/Linux
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+#### 构建
 
 ```bash
 cd frontend
-VITE_BUILD_TARGET=tauri npm run build
-npx tauri build
-# 产物：src-tauri/target/release/bundle/{msi,nsis,deb,appimage,dmg}/
+
+# 开发模式（热重载）
+npm run tauri:dev
+
+# 生产构建
+npm run tauri:build
+
+# 调试构建
+npm run tauri:build:debug
 ```
 
-### 3.4 后端怎么办
+构建产物位于 `frontend/src-tauri/target/release/bundle/`：
+- **Windows**: `.msi` / `.exe`
+- **macOS**: `.dmg` / `.app`
+- **Linux**: `.deb` / `.AppImage`
 
-桌面版有两种模式（按需选择，二选一即可）：
+### 4. 移动应用部署（Capacitor）
 
-- **Sidecar 模式（推荐）**：`tauri.conf.json` 增 `bundle.externalBin = ["binaries/echolens-backend"]`，把 PyInstaller 打成独立可执行档随包发布，进程随窗口生命周期。
-- **远端模式**：用户填写后端 URL，桌面只是 webview 壳。适合 SaaS。
+构建 iOS 和 Android 应用。
 
-当前 scaffold 走 **远端模式**（CSP 允许 `connect-src http://localhost:5001`），sidecar 留作 M6 工作。
+#### 环境要求
 
-### 3.5 已经就位的文件
+- **Node.js**: >= 18
+- **iOS**: Xcode 14+, CocoaPods
+- **Android**: Android Studio, JDK 17+
 
-```
-frontend/src-tauri/
-├── Cargo.toml
-├── build.rs
-├── tauri.conf.json
-├── capabilities/default.json
-├── src/main.rs
-├── src/lib.rs
-├── icons/.gitkeep            # 真实打包前需放图标
-└── .gitignore                # target/, gen/
-```
-
-`Cargo.lock` / `target/` / `gen/` 已纳入根 `.gitignore`，不会污染仓库。
-
----
-
-## 4. Capacitor Android
-
-### 4.1 一次性环境
+#### 构建
 
 ```bash
 cd frontend
-npm install -D @capacitor/cli @capacitor/core @capacitor/android
-# 系统侧
-# - Android Studio (含 Android SDK + Platform Tools)
-# - Java 17+
-# - 在 Android Studio 中安装至少一个 emulator image
+
+# 构建 Web 资源
+npm run build
+
+# 同步到原生项目
+npm run cap:sync
+
+# iOS
+npm run cap:open:ios
+# 在 Xcode 中构建和运行
+
+# Android
+npm run cap:open:android
+# 在 Android Studio 中构建和运行
 ```
 
-### 4.2 首次初始化
+## 环境变量配置
+
+### 后端 `.env`
 
 ```bash
-cd frontend
-VITE_BUILD_TARGET=capacitor npm run build
-npx cap add android        # 生成 frontend/android/（已 .gitignore）
-npx cap sync android
+# LLM API 配置
+LLM_API_KEY=your-api-key-here
+LLM_BASE_URL=https://api.openai.com/v1
+LLM_MODEL_NAME=gpt-4o-mini
+
+# Zep Cloud 配置（知识图谱）
+ZEP_API_KEY=your-zep-api-key
+
+# Flask 配置
+FLASK_DEBUG=False
+FLASK_ENV=production
+
+# 数据库路径
+DUCKDB_PATH=./data/echolens.duckdb
+
+# 日志级别
+LOG_LEVEL=INFO
 ```
 
-### 4.3 调试 / 打包
+### 前端 `.env`
 
 ```bash
-# 每次前端改动后
-VITE_BUILD_TARGET=capacitor npm run build
-npx cap sync android
-npx cap open android       # → Android Studio 调试 / 出 APK / AAB
+# API 基础 URL（可选，默认使用平台抽象层自动配置）
+VITE_API_BASE_URL=http://localhost:5001
+
+# 构建目标（web / tauri / capacitor）
+VITE_BUILD_TARGET=web
 ```
 
-### 4.4 后端连接
+## 生产环境配置
 
-Android emulator 内 `localhost` = emulator 本身，**不是 host**。本地开发把 `capacitor.config.ts` 临时改成：
+### 1. 反向代理（Nginx）
 
-```ts
-server: {
-  url: 'http://10.0.2.2:5001',   // emulator → host loopback
-  cleartext: true,
+```nginx
+server {
+    listen 80;
+    server_name echolens.example.com;
+
+    # 前端静态资源
+    location / {
+        root /var/www/echolens/frontend/dist;
+        try_files $uri $uri/ /index.html;
+    }
+
+    # 后端 API
+    location /api {
+        proxy_pass http://localhost:5001;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # SSE 支持
+    location /api/stream {
+        proxy_pass http://localhost:5001;
+        proxy_set_header Connection '';
+        proxy_http_version 1.1;
+        chunked_transfer_encoding off;
+        proxy_buffering off;
+        proxy_cache off;
+    }
 }
 ```
 
-真机调试用同网段 IP（`http://192.168.x.y:5001`）+ `cleartext: true`。生产必须 HTTPS + `cleartext: false`。
+### 2. HTTPS 配置（Let's Encrypt）
 
-### 4.5 已经就位的文件
+```bash
+# 安装 Certbot
+sudo apt install certbot python3-certbot-nginx
 
+# 获取证书
+sudo certbot --nginx -d echolens.example.com
+
+# 自动续期
+sudo certbot renew --dry-run
 ```
-frontend/capacitor.config.ts        # appId / webDir / android 选项
+
+### 3. 进程管理（systemd）
+
+#### 后端服务
+
+创建 `/etc/systemd/system/echolens-backend.service`：
+
+```ini
+[Unit]
+Description=EchoLens Backend
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/echolens/backend
+Environment="PATH=/var/www/echolens/backend/.venv/bin"
+ExecStart=/var/www/echolens/backend/.venv/bin/python run.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
 ```
 
-`frontend/android/` 由 `npx cap add android` 生成，已纳入 `.gitignore`。
+启动服务：
 
----
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable echolens-backend
+sudo systemctl start echolens-backend
+sudo systemctl status echolens-backend
+```
 
-## 5. CI/CD 建议
+### 4. 数据库备份
 
-| 路线 | CI 任务 |
-|---|---|
-| Docker Compose | `docker buildx build --push` 推到 GHCR / ECR；服务器 `docker compose pull && up -d` |
-| Web 静态 | `npm run build` → 上传 dist/ 到 S3/OSS + invalidate CDN |
-| Tauri Desktop | matrix: windows-latest / ubuntu-latest / macos-latest，跑 `tauri build`，artefact 上传到 GitHub Release |
-| Capacitor Android | ubuntu-latest + Java 17，跑 `cap sync android` + `gradlew assembleRelease`，签名后传到 Play Console internal track |
+```bash
+#!/bin/bash
+# backup.sh
 
-后端 CI 已固化：`backend/.github/...` 待补，本里程碑外。
+BACKUP_DIR="/var/backups/echolens"
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
----
+# 备份 DuckDB
+cp /var/www/echolens/backend/data/echolens.duckdb \
+   $BACKUP_DIR/echolens_$TIMESTAMP.duckdb
 
-## 6. 风险与已知约束
+# 保留最近 7 天的备份
+find $BACKUP_DIR -name "echolens_*.duckdb" -mtime +7 -delete
+```
 
-- **CORS**：旧项目用 `*` 是已知问题；EchoLens 2.0 默认 `r"/api/*"` + `origins="*"` 仅供本地开发。生产部署务必把 origins 收窄到具体域名。
-- **secrets**：`.env` 永不入 git；K8s 用 `Secret`，桌面 sidecar 用 OS keychain。
-- **CSP**：Tauri `tauri.conf.json` 当前 `connect-src` 仅放行 `http://localhost:5001`，远端部署需要改成实际域名 / 走 IPC。
-- **iOS**：本里程碑不纳入；后续若需要，加 `npx cap add ios` + Xcode toolchain + 证书。
+添加到 crontab：
 
----
+```bash
+# 每天凌晨 2 点备份
+0 2 * * * /var/www/echolens/scripts/backup.sh
+```
 
-## 7. 路线对照表
+## 性能优化
 
-|  | Docker Compose | Web | Tauri Desktop | Capacitor Android |
-|---|---|---|---|---|
-| 终端用户安装难度 | 中（懂 Docker） | 低（开浏览器） | 低（exe / dmg） | 中（APK 或 Play） |
-| 后端运行位置 | 同机 | 服务器 | sidecar / 远端 | 远端 |
-| 离线可用 | 是 | 否 | sidecar 模式：是 | 否（需远端） |
-| 当前状态 | ✅ 可用 | ✅ 可用 | 🛠 scaffold | 🛠 scaffold |
+### 1. 前端优化
+
+- ✅ 代码分割（已实现）
+- ✅ 懒加载路由（已实现）
+- ✅ Gzip 压缩（Nginx 配置）
+- 🚧 CDN 加速（可选）
+- 🚧 Service Worker 缓存（可选）
+
+### 2. 后端优化
+
+- 使用 Gunicorn 多进程部署
+- 配置 Redis 缓存
+- 数据库连接池
+- 异步任务队列（Celery）
+
+```bash
+# Gunicorn 部署
+pip install gunicorn
+
+gunicorn -w 4 -b 0.0.0.0:5001 \
+  --timeout 120 \
+  --access-logfile - \
+  --error-logfile - \
+  run:app
+```
+
+## 监控和日志
+
+### 1. 应用监控
+
+推荐使用：
+- **Sentry**: 错误追踪
+- **Prometheus + Grafana**: 性能监控
+- **ELK Stack**: 日志聚合
+
+### 2. 健康检查
+
+```bash
+# 后端健康检查
+curl http://localhost:5001/api/health
+
+# 前端健康检查
+curl http://localhost:3000
+```
+
+## 故障排查
+
+### 后端无法启动
+
+1. 检查环境变量：`cat .env`
+2. 检查依赖：`.venv/Scripts/python -m pip list`
+3. 检查日志：`tail -f logs/app.log`
+4. 检查端口占用：`netstat -ano | findstr 5001`
+
+### 前端构建失败
+
+1. 清理缓存：`npm run clean && npm install`
+2. 检查 Node 版本：`node --version`（需要 >= 18）
+3. 检查磁盘空间：`df -h`
+
+### 数据库错误
+
+1. 检查文件权限：`ls -la data/echolens.duckdb`
+2. 检查磁盘空间
+3. 尝试重建：删除 `.duckdb` 文件后重启
+
+### 跨平台构建失败
+
+#### Tauri
+
+1. 检查 Rust：`rustc --version`
+2. 更新 Rust：`rustup update`
+3. 清理缓存：`cargo clean`
+
+#### Capacitor
+
+1. 检查 Xcode / Android Studio 安装
+2. 清理原生项目：删除 `ios/` 和 `android/` 后重新 `cap add`
+3. 检查 CocoaPods：`pod --version`
+
+## 安全建议
+
+1. **API Key 保护**：不要将 API Key 提交到版本控制
+2. **HTTPS**：生产环境必须使用 HTTPS
+3. **CORS 配置**：限制允许的来源域名
+4. **输入验证**：后端严格验证所有输入
+5. **定期更新**：及时更新依赖包修复安全漏洞
+
+## 扩展阅读
+
+- [Docker 官方文档](https://docs.docker.com/)
+- [Tauri 部署指南](https://tauri.app/v1/guides/building/)
+- [Capacitor 部署指南](https://capacitorjs.com/docs/deployment)
+- [Nginx 配置最佳实践](https://www.nginx.com/resources/wiki/)

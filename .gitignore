@@ -33,26 +33,37 @@ frontend/dist/
 **/data/
 **/uploads/
 **/*.duckdb
+**/*.duckdb.wal
 **/kuzu_db/
 backend/.test_data/
 
-# Local report production line (per PRD §A) — NEVER commit
+# Privacy and local development
 labs/
+实战报告数据源/
+fix_graph_encoding.py
+backend/test_report.py
 
 # Dockerized output volumes
 **/runs/
 
-# OMC artefacts
-.omc/state/
-.omc/handoffs/
-.claude/settings.local.json
+# OMC artefacts (oh-my-claudecode)
+.omc/
+.claude/
 
 # Tauri (desktop) build artefacts
 frontend/src-tauri/target/
 frontend/src-tauri/gen/
 frontend/src-tauri/Cargo.lock
 
-# Capacitor (Android) build artefacts
+# Capacitor (Android/iOS) build artefacts
 frontend/android/
 frontend/ios/
 frontend/.capacitor/
+
+# Ignore files themselves (don't commit nested ignore files)
+**/.gitignore
+**/.dockerignore
+**/.npmignore
+!/.gitignore
+!/backend/.gitignore
+!/frontend/.gitignore

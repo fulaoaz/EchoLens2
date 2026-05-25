@@ -35,10 +35,33 @@ export default defineConfig({
     chunkSizeWarningLimit: 1500,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-vue': ['vue', 'vue-router', 'pinia'],
-          'vendor-naive': ['naive-ui'],
-          'vendor-charts': ['echarts', 'd3', '@antv/g6'],
+        manualChunks(id) {
+          // Vue 核心
+          if (id.includes('node_modules/vue') || id.includes('node_modules/pinia') || id.includes('node_modules/vue-router')) {
+            return 'vendor-vue'
+          }
+          // Naive UI
+          if (id.includes('node_modules/naive-ui')) {
+            return 'vendor-naive'
+          }
+          // 图表库
+          if (id.includes('node_modules/echarts')) {
+            return 'vendor-echarts'
+          }
+          if (id.includes('node_modules/d3')) {
+            return 'vendor-d3'
+          }
+          if (id.includes('node_modules/@antv/g6')) {
+            return 'vendor-g6'
+          }
+          // Axios
+          if (id.includes('node_modules/axios')) {
+            return 'vendor-axios'
+          }
+          // 其他 node_modules
+          if (id.includes('node_modules')) {
+            return 'vendor-misc'
+          }
         },
       },
     },

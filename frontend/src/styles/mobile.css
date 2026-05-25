@@ -1,0 +1,248 @@
+/**
+ * 移动端适配样式
+ *
+ * 响应式断点：
+ * - mobile: < 768px
+ * - tablet: 768px - 1024px
+ * - desktop: > 1024px
+ */
+
+/* 移动端基础布局 */
+@media (max-width: 767px) {
+  /* 全局容器 */
+  .container {
+    padding: 12px;
+  }
+
+  /* 卡片间距 */
+  .n-card {
+    margin-bottom: 12px;
+  }
+
+  /* 表格横向滚动 */
+  .n-data-table {
+    overflow-x: auto;
+  }
+
+  /* 表单项堆叠 */
+  .n-form-item {
+    flex-direction: column;
+  }
+
+  .n-form-item-label {
+    width: 100% !important;
+    text-align: left;
+    padding-bottom: 8px;
+  }
+
+  /* 按钮组堆叠 */
+  .n-button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .n-button-group .n-button {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  /* 步骤条垂直布局 */
+  .n-steps {
+    flex-direction: column;
+  }
+
+  /* 图表容器 */
+  .chart-container {
+    height: 300px !important;
+    min-height: 300px;
+  }
+
+  /* 隐藏桌面端专属元素 */
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* 移动端专属元素 */
+  .mobile-only {
+    display: block !important;
+  }
+
+  /* 触摸友好的按钮尺寸 */
+  .n-button {
+    min-height: 44px;
+    padding: 0 20px;
+  }
+
+  /* 触摸友好的输入框 */
+  .n-input {
+    min-height: 44px;
+  }
+
+  /* 模态框全屏 */
+  .n-modal {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  /* 抽屉全屏 */
+  .n-drawer {
+    width: 100vw !important;
+  }
+
+  /* KPI 卡片网格 */
+  .kpi-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 决策看板 chip 换行 */
+  .decision-chips {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* 仿真控制台紧凑布局 */
+  .simulation-console {
+    padding: 8px;
+  }
+
+  .simulation-console .n-log {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  /* 预测图表堆叠 */
+  .prediction-charts {
+    flex-direction: column;
+  }
+
+  .prediction-chart {
+    width: 100% !important;
+    margin-bottom: 16px;
+  }
+
+  /* 网络图缩小 */
+  .network-graph {
+    height: 400px !important;
+  }
+
+  /* 报告面板 */
+  .report-panel {
+    padding: 12px;
+  }
+
+  .report-panel h2 {
+    font-size: 18px;
+  }
+
+  .report-panel h3 {
+    font-size: 16px;
+  }
+
+  /* 文件上传区域 */
+  .upload-dragger {
+    padding: 20px 12px;
+  }
+
+  /* 导航栏 */
+  .n-layout-header {
+    padding: 0 12px;
+  }
+
+  /* 侧边栏全屏 */
+  .n-layout-sider {
+    width: 100vw !important;
+  }
+}
+
+/* 平板端适配 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 16px;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .prediction-charts {
+    flex-wrap: wrap;
+  }
+
+  .prediction-chart {
+    width: calc(50% - 8px) !important;
+  }
+
+  .chart-container {
+    height: 350px !important;
+  }
+}
+
+/* 桌面端 */
+@media (min-width: 1024px) {
+  .mobile-only {
+    display: none !important;
+  }
+
+  .desktop-only {
+    display: block !important;
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  /* 增大可点击区域 */
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* 禁用 hover 效果 */
+  .n-button:hover,
+  .n-card:hover {
+    transform: none !important;
+  }
+
+  /* 触摸反馈 */
+  .n-button:active {
+    opacity: 0.7;
+  }
+
+  /* 滚动优化 */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* 横屏模式 */
+@media (max-width: 767px) and (orientation: landscape) {
+  .chart-container {
+    height: 250px !important;
+  }
+
+  .network-graph {
+    height: 300px !important;
+  }
+
+  /* 导航栏紧凑 */
+  .n-layout-header {
+    height: 48px;
+  }
+}
+
+/* 安全区域适配（刘海屏） */
+@supports (padding: max(0px)) {
+  .n-layout-header {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+
+  .n-layout-footer {
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  .n-layout-sider {
+    padding-left: max(0px, env(safe-area-inset-left));
+  }
+}

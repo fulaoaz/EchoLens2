@@ -28,3 +28,15 @@ Thumbs.db
 # Repo metadata (image only needs runtime code)
 .git
 .gitignore
+.dockerignore
+
+# Privacy and local development
+labs/
+data/
+uploads/
+runs/
+*.duckdb
+*.duckdb.wal
+kuzu_db/
+test_report.py
+

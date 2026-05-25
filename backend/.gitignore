@@ -16,7 +16,15 @@ build/
 *.duckdb.wal
 kuzu_db/
 data/
+uploads/
+runs/
+
+# Privacy and local development
 labs/
+test_report.py
+
+# Editors / OS
 .DS_Store
 .idea/
 .vscode/
+

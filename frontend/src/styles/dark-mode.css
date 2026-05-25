@@ -1,0 +1,237 @@
+/**
+ * 深色模式样式变量
+ */
+
+:root {
+  /* 浅色模式颜色 */
+  --color-bg-base: #ffffff;
+  --color-bg-elevated: #f5f5f5;
+  --color-bg-hover: #f0f0f0;
+  --color-text-primary: #18181c;
+  --color-text-secondary: #51525c;
+  --color-text-tertiary: #8e8e93;
+  --color-border: #e5e5e5;
+  --color-border-hover: #d4d4d4;
+
+  /* 品牌色 */
+  --color-primary: #18a058;
+  --color-primary-hover: #36ad6a;
+  --color-primary-pressed: #0c7a43;
+
+  /* 功能色 */
+  --color-success: #18a058;
+  --color-warning: #f0a020;
+  --color-error: #d03050;
+  --color-info: #2080f0;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* 深色模式 */
+.dark {
+  /* 深色模式颜色 */
+  --color-bg-base: #18181c;
+  --color-bg-elevated: #2c2c32;
+  --color-bg-hover: #3c3c43;
+  --color-text-primary: #ffffffd9;
+  --color-text-secondary: #ffffffa6;
+  --color-text-tertiary: #ffffff73;
+  --color-border: #ffffff1a;
+  --color-border-hover: #ffffff33;
+
+  /* 品牌色（深色模式下稍微调亮）*/
+  --color-primary: #2ba471;
+  --color-primary-hover: #3fb884;
+  --color-primary-pressed: #1f8a5a;
+
+  /* 功能色 */
+  --color-success: #2ba471;
+  --color-warning: #f2c97d;
+  --color-error: #e88080;
+  --color-info: #70c0e8;
+
+  /* 阴影（深色模式下使用更深的阴影）*/
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+/* 全局样式应用 */
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 卡片 */
+.n-card {
+  background-color: var(--color-bg-elevated);
+  border-color: var(--color-border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.n-card:hover {
+  border-color: var(--color-border-hover);
+}
+
+/* 输入框 */
+.n-input,
+.n-select,
+.n-date-picker {
+  background-color: var(--color-bg-base);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+/* 表格 */
+.n-data-table {
+  background-color: var(--color-bg-elevated);
+}
+
+.n-data-table th {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-secondary);
+}
+
+.n-data-table td {
+  border-color: var(--color-border);
+}
+
+/* 模态框 */
+.n-modal {
+  background-color: var(--color-bg-elevated);
+}
+
+/* 抽屉 */
+.n-drawer {
+  background-color: var(--color-bg-elevated);
+}
+
+/* 代码块 */
+pre,
+code {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.dark pre,
+.dark code {
+  background-color: #1e1e1e;
+}
+
+/* 图表容器 */
+.chart-container {
+  background-color: var(--color-bg-elevated);
+  transition: background-color 0.3s ease;
+}
+
+/* 深色模式下的图表主题会在 ECharts 初始化时动态设置 */
+
+/* 滚动条（深色模式）*/
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-bg-hover);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #4c4c54;
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: var(--color-bg-hover);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-bg-elevated);
+  border-color: var(--color-border-hover);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-text-primary);
+}
+
+/* 深色模式下的特殊处理 */
+.dark .n-layout-header {
+  background-color: var(--color-bg-elevated);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dark .n-layout-sider {
+  background-color: var(--color-bg-elevated);
+  border-right: 1px solid var(--color-border);
+}
+
+.dark .n-menu {
+  background-color: transparent;
+}
+
+/* 深色模式下的阴影 */
+.dark .n-card,
+.dark .n-modal,
+.dark .n-drawer {
+  box-shadow: var(--shadow-lg);
+}
+
+/* 深色模式下的链接 */
+.dark a {
+  color: var(--color-primary);
+}
+
+.dark a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* 深色模式下的分割线 */
+.dark .n-divider {
+  background-color: var(--color-border);
+}
+
+/* 深色模式下的标签 */
+.dark .n-tag {
+  background-color: var(--color-bg-hover);
+  border-color: var(--color-border);
+}
+
+/* 深色模式下的徽章 */
+.dark .n-badge {
+  background-color: var(--color-primary);
+}
+
+/* 深色模式下的进度条 */
+.dark .n-progress {
+  background-color: var(--color-bg-hover);
+}
+
+/* 深色模式下的骨架屏 */
+.dark .n-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-hover) 25%,
+    var(--color-bg-elevated) 37%,
+    var(--color-bg-hover) 63%
+  );
+}

@@ -4,6 +4,7 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios'
+import { getApiBaseUrl } from '@/composables/usePlatform'
 
 /** Backend response envelope (best-effort: tolerates plain payloads too). */
 export interface ApiEnvelope<T = unknown> {
@@ -24,7 +25,7 @@ const MAX_RETRIES = 2
 const RETRY_BACKOFF_MS = 400
 
 const http: AxiosInstance = axios.create({
-  baseURL: '/api',
+  baseURL: `${getApiBaseUrl()}/api`,
   timeout: DEFAULT_TIMEOUT_MS,
   headers: {
     'Content-Type': 'application/json',

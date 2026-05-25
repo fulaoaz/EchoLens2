@@ -18,3 +18,9 @@ playwright-report/
 test-results/
 e2e/downloads/
 .playwright/
+
+# Build artifacts
+android/
+ios/
+.capacitor/
+
