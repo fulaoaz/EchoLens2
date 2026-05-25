@@ -257,7 +257,31 @@ Follow Conventional Commits:
 
 ## 📄 License
 
-This project is licensed under [AGPL-3.0](LICENSE).
+This project uses a **dual licensing** model:
+
+### 🆓 Open Source License (AGPL-3.0)
+
+For **non-commercial use** (personal learning, academic research, open source projects), this project is licensed under [AGPL-3.0](LICENSE).
+
+**Requirements**:
+- ✅ Free to use, modify, and distribute
+- ✅ Can be used for personal and academic research
+- ⚠️ Modified code must be open sourced
+- ⚠️ Network services must also be open sourced (AGPL feature)
+
+### 💼 Commercial License
+
+For **commercial use** (commercial products, SaaS services, consulting services), a separate commercial license is required.
+
+**Benefits**:
+- ✅ No need to open source your modifications and derivatives
+- ✅ Can be integrated into closed-source products
+- ✅ Can provide commercial services
+- ✅ Technical support and consulting services
+
+**Contact**: fulaoaz@qq.com
+
+For detailed license terms, please refer to the [LICENSE](LICENSE) file.
 
 ---
 
