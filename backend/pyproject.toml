@@ -1,0 +1,70 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "echolens2-backend"
+version = "0.1.0"
+description = "EchoLens 2.0 backend — e-commerce sentiment + prediction platform."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "AGPL-3.0-or-later" }
+authors = [{ name = "EchoLens Team" }]
+dependencies = [
+    "flask>=3.0",
+    "flask-cors>=4.0",
+    "pydantic>=2.5",
+    "python-dotenv>=1.0",
+    "openai>=1.40",
+    "crawl4ai>=0.4",
+    "kuzu>=0.6",
+    "networkx>=3.2",
+    "duckdb>=1.0",
+    "pandas>=2.1",
+    "pyarrow>=15.0",
+    "pymupdf>=1.24",
+    "apscheduler>=3.10",
+]
+
+[project.optional-dependencies]
+prediction = [
+    "prophet>=1.1.5",
+    "neuralprophet>=0.8",
+    "dowhy>=0.11",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501", "B017"]
+"app/predictor/timeseries.py" = ["B007"]
+"app/services/report_builder.py" = ["E501"]
+"app/services/decision_engine.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unreachable = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-ra"

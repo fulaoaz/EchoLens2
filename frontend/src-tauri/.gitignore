@@ -1,0 +1,7 @@
+# Build artifacts
+/target/
+/gen/
+
+# Per-platform bundles
+/icons/*
+!/icons/.gitkeep

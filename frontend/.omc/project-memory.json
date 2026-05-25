@@ -1,0 +1,174 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1779371066319,
+  "projectRoot": "F:\\Projects\\EchoLens2\\frontend",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "vue",
+        "version": "3.5.13",
+        "category": "frontend"
+      },
+      {
+        "name": "vite",
+        "version": "5.4.10",
+        "category": "build"
+      },
+      {
+        "name": "vitest",
+        "version": "2.1.9",
+        "category": "testing"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": "npm test",
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "vite",
+      "build": "vue-tsc --noEmit && vite build",
+      "preview": "vite preview --port 4173",
+      "lint": "eslint . --ext .vue,.ts,.tsx,.js,.cjs --max-warnings 0",
+      "lint:fix": "eslint . --ext .vue,.ts,.tsx,.js,.cjs --fix",
+      "type-check": "vue-tsc --noEmit",
+      "test": "vitest run"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": "type-based"
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "public",
+      "src"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "dist": {
+      "path": "dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 1,
+      "lastAccessed": 1779371066255,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 0,
+      "lastAccessed": 1779371066287,
+      "keyFiles": []
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 3,
+      "lastAccessed": 1779371066288,
+      "keyFiles": [
+        "App.vue",
+        "env.d.ts",
+        "main.ts"
+      ]
+    },
+    "src-tauri": {
+      "path": "src-tauri",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1779371066289,
+      "keyFiles": [
+        "build.rs",
+        "Cargo.toml",
+        "tauri.conf.json"
+      ]
+    },
+    "dist\\assets": {
+      "path": "dist\\assets",
+      "purpose": "Static assets",
+      "fileCount": 23,
+      "lastAccessed": 1779371066289,
+      "keyFiles": [
+        "AnalyticsOutline-BXXsaaGy.js",
+        "DecisionBoard-lfXodY-M.js",
+        "DecisionBoardPanel-BzAv18ea.js"
+      ]
+    },
+    "src\\api": {
+      "path": "src\\api",
+      "purpose": "API routes",
+      "fileCount": 7,
+      "lastAccessed": 1779371066290,
+      "keyFiles": [
+        "crawler.ts",
+        "decision.ts",
+        "index.ts"
+      ]
+    },
+    "src\\assets": {
+      "path": "src\\assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1779371066291,
+      "keyFiles": []
+    },
+    "src\\components": {
+      "path": "src\\components",
+      "purpose": "UI components",
+      "fileCount": 0,
+      "lastAccessed": 1779371066291,
+      "keyFiles": []
+    },
+    "src\\views": {
+      "path": "src\\views",
+      "purpose": "View templates",
+      "fileCount": 5,
+      "lastAccessed": 1779371066292,
+      "keyFiles": [
+        "DecisionBoard.vue",
+        "PredictionLab.vue",
+        "ProjectDetail.vue"
+      ]
+    },
+    "src-tauri\\src": {
+      "path": "src-tauri\\src",
+      "purpose": "Source code",
+      "fileCount": 2,
+      "lastAccessed": 1779371066292,
+      "keyFiles": [
+        "lib.rs",
+        "main.rs"
+      ]
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}

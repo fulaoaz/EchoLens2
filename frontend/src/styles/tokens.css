@@ -1,0 +1,123 @@
+/**
+ * EchoLens 2.0 — Design tokens
+ * Single source of truth for color, spacing, typography, motion.
+ * Naive UI theme overrides (src/styles/naive-theme.ts) re-export from these vars.
+ */
+
+:root {
+  /* Surfaces */
+  --bg-primary: #0b1020;
+  --bg-elevated: #131932;
+  --bg-card: #1a2142;
+
+  /* Brand */
+  --color-primary: #5b8def;
+  --color-primary-hover: #7aa3f2;
+  --color-primary-pressed: #4779d8;
+  --color-accent: #00e5a8;
+  --color-accent-hover: #33eebd;
+  --color-warn: #ffb454;
+  --color-danger: #ff6b6b;
+
+  /* Text */
+  --text-primary: #e2e8f0;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-disabled: #64748b;
+
+  /* Border */
+  --border: rgba(91, 141, 239, 0.2);
+  --border-hover: rgba(91, 141, 239, 0.4);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Shadow */
+  --shadow-glow: 0 0 32px rgba(91, 141, 239, 0.3);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.55);
+
+  /* Spacing scale (4px base) */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* Typography */
+  --font-sans: 'Inter', '思源黑体', 'Source Han Sans CN', system-ui, -apple-system,
+    'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Fira Code', Menlo, monospace;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-base: 14px;
+  --fs-md: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 22px;
+  --fs-2xl: 28px;
+  --fs-3xl: 36px;
+
+  /* Motion */
+  --motion-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layered backgrounds */
+  --gradient-hero: radial-gradient(
+      120% 80% at 0% 0%,
+      rgba(91, 141, 239, 0.18) 0%,
+      transparent 60%
+    ),
+    radial-gradient(80% 60% at 100% 0%, rgba(0, 229, 168, 0.12) 0%, transparent 55%),
+    var(--bg-primary);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+code,
+.mono {
+  font-family: var(--font-mono);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(91, 141, 239, 0.25);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(91, 141, 239, 0.45);
+}

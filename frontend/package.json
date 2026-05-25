@@ -1,0 +1,52 @@
+{
+  "name": "echolens2-frontend",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "description": "EchoLens 2.0 — 电商舆情智能体仿真 + 数据预测决策平台 (frontend)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173",
+    "lint": "eslint . --ext .vue,.ts,.tsx,.js,.cjs --max-warnings 0",
+    "lint:fix": "eslint . --ext .vue,.ts,.tsx,.js,.cjs --fix",
+    "type-check": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug"
+  },
+  "dependencies": {
+    "@antv/g6": "^5.0.42",
+    "@vicons/ionicons5": "^0.13.0",
+    "axios": "^1.7.9",
+    "d3": "^7.9.0",
+    "echarts": "^6.0.0",
+    "naive-ui": "^2.40.4",
+    "pinia": "^2.3.1",
+    "vfonts": "^0.0.3",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/d3": "^7.4.3",
+    "@types/node": "^22.10.5",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/test-utils": "^2.4.6",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-vue": "^9.32.0",
+    "jsdom": "^25.0.1",
+    "playwright": "^1.60.0",
+    "prettier": "^3.4.2",
+    "typescript": "~5.6.3",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.9",
+    "vue-eslint-parser": "^9.4.3",
+    "vue-tsc": "^2.2.0"
+  }
+}

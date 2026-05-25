@@ -1,0 +1,30 @@
+# Build artefacts and caches
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.venv
+venv
+env
+.env
+.env.*
+!.env.example
+
+# Test + tooling
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.coverage
+htmlcov
+tests
+docs
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+
+# Repo metadata (image only needs runtime code)
+.git
+.gitignore

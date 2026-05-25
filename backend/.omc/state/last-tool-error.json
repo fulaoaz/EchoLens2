@@ -1,0 +1,7 @@
+{
+  "tool_name": "Read",
+  "tool_input_preview": "{\"file_path\":\"F:\\\\Projects\\\\EchoLens2\\\\backend\\\\tests\\\\test_sim_jobs.py\"}",
+  "error": "File does not exist. Note: your current working directory is F:\\Projects\\EchoLens2\\backend.",
+  "timestamp": "2026-05-22T02:17:52.681Z",
+  "retry_count": 1
+}

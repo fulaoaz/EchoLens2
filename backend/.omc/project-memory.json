@@ -1,0 +1,340 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1779364468172,
+  "projectRoot": "F:\\Projects\\EchoLens2\\backend",
+  "techStack": {
+    "languages": [
+      {
+        "name": "Python",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "pyproject.toml"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "flask",
+        "version": null,
+        "category": "backend"
+      },
+      {
+        "name": "pytest",
+        "version": null,
+        "category": "testing"
+      }
+    ],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "cd /f/Projects/EchoLens2/frontend && npm run build 2>&1 | tail -n 30",
+    "testCommand": "cd /f/Projects/EchoLens2/backend && ./.venv/Scripts/python.exe -m pytest tests/test_report_api.py::test_download_html_wraps_phase_d_sections_with_class -q 2>&1 | tail -n 40",
+    "lintCommand": "ruff check",
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": "snake_case",
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "app",
+      "tests"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "app": {
+      "path": "app",
+      "purpose": "Application code",
+      "fileCount": 2,
+      "lastAccessed": 1779364468145,
+      "keyFiles": [
+        "config.py",
+        "__init__.py"
+      ]
+    },
+    "tests": {
+      "path": "tests",
+      "purpose": "Test files",
+      "fileCount": 22,
+      "lastAccessed": 1779364468145,
+      "keyFiles": [
+        "conftest.py",
+        "test_blueprints_register.py",
+        "test_crawler_compliance.py",
+        "test_crawler_engine_and_seed.py",
+        "test_crawler_pipeline.py"
+      ]
+    },
+    "app\\api": {
+      "path": "app\\api",
+      "purpose": "API routes",
+      "fileCount": 7,
+      "lastAccessed": 1779364468146,
+      "keyFiles": [
+        "crawler.py",
+        "decision.py",
+        "prediction.py"
+      ]
+    },
+    "app\\models": {
+      "path": "app\\models",
+      "purpose": "Data models",
+      "fileCount": 4,
+      "lastAccessed": 1779364468146,
+      "keyFiles": [
+        "project.py",
+        "report.py",
+        "run.py"
+      ]
+    },
+    "app\\services": {
+      "path": "app\\services",
+      "purpose": "Business logic services",
+      "fileCount": 10,
+      "lastAccessed": 1779364468147,
+      "keyFiles": [
+        "crawler_store.py",
+        "decision_engine.py",
+        "duckdb_store.py"
+      ]
+    },
+    "app\\utils": {
+      "path": "app\\utils",
+      "purpose": "Utility functions",
+      "fileCount": 1,
+      "lastAccessed": 1779364468147,
+      "keyFiles": [
+        "__init__.py"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "tests\\test_report_api.py",
+      "accessCount": 10,
+      "lastAccessed": 1779427513457,
+      "type": "file"
+    },
+    {
+      "path": "app\\simulator\\runner.py",
+      "accessCount": 9,
+      "lastAccessed": 1779423924282,
+      "type": "file"
+    },
+    {
+      "path": "tests\\test_decision_api.py",
+      "accessCount": 9,
+      "lastAccessed": 1779427078968,
+      "type": "file"
+    },
+    {
+      "path": "app\\services\\sim_jobs.py",
+      "accessCount": 8,
+      "lastAccessed": 1779426984258,
+      "type": "file"
+    },
+    {
+      "path": "app\\services\\prediction_jobs.py",
+      "accessCount": 7,
+      "lastAccessed": 1779426985361,
+      "type": "file"
+    },
+    {
+      "path": "app\\predictor\\history.py",
+      "accessCount": 5,
+      "lastAccessed": 1779422397036,
+      "type": "file"
+    },
+    {
+      "path": "app\\api\\simulation.py",
+      "accessCount": 5,
+      "lastAccessed": 1779423946111,
+      "type": "file"
+    },
+    {
+      "path": "app\\api\\report.py",
+      "accessCount": 5,
+      "lastAccessed": 1779424523718,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 5,
+      "lastAccessed": 1779426239057,
+      "type": "directory"
+    },
+    {
+      "path": "app\\services\\decision_engine.py",
+      "accessCount": 5,
+      "lastAccessed": 1779426985034,
+      "type": "file"
+    },
+    {
+      "path": "app\\services\\report_html.py",
+      "accessCount": 4,
+      "lastAccessed": 1779426677606,
+      "type": "file"
+    },
+    {
+      "path": "app\\__init__.py",
+      "accessCount": 3,
+      "lastAccessed": 1779364673290,
+      "type": "file"
+    },
+    {
+      "path": "tests\\test_simulation_api_async.py",
+      "accessCount": 3,
+      "lastAccessed": 1779418459106,
+      "type": "file"
+    },
+    {
+      "path": "tests\\test_prediction_api.py",
+      "accessCount": 3,
+      "lastAccessed": 1779423371255,
+      "type": "file"
+    },
+    {
+      "path": "pyproject.toml",
+      "accessCount": 3,
+      "lastAccessed": 1779426239097,
+      "type": "file"
+    },
+    {
+      "path": "tests\\test_health.py",
+      "accessCount": 2,
+      "lastAccessed": 1779364683678,
+      "type": "file"
+    },
+    {
+      "path": "tests\\test_simulator_runner.py",
+      "accessCount": 2,
+      "lastAccessed": 1779415978528,
+      "type": "file"
+    },
+    {
+      "path": "app\\predictor\\timeseries.py",
+      "accessCount": 2,
+      "lastAccessed": 1779422312326,
+      "type": "file"
+    },
+    {
+      "path": "app\\predictor\\causal.py",
+      "accessCount": 2,
+      "lastAccessed": 1779422322591,
+      "type": "file"
+    },
+    {
+      "path": "app\\api\\prediction.py",
+      "accessCount": 2,
+      "lastAccessed": 1779422322869,
+      "type": "file"
+    },
+    {
+      "path": "app\\predictor\\explainer.py",
+      "accessCount": 2,
+      "lastAccessed": 1779422322942,
+      "type": "file"
+    },
+    {
+      "path": "app\\kg\\search.py",
+      "accessCount": 2,
+      "lastAccessed": 1779426239001,
+      "type": "file"
+    },
+    {
+      "path": "tests",
+      "accessCount": 2,
+      "lastAccessed": 1779427013639,
+      "type": "directory"
+    },
+    {
+      "path": "app\\services\\duckdb_store.py",
+      "accessCount": 1,
+      "lastAccessed": 1779364493761,
+      "type": "file"
+    },
+    {
+      "path": "app\\services\\project_store.py",
+      "accessCount": 1,
+      "lastAccessed": 1779364493829,
+      "type": "file"
+    },
+    {
+      "path": "tests\\conftest.py",
+      "accessCount": 1,
+      "lastAccessed": 1779364626396,
+      "type": "file"
+    },
+    {
+      "path": "app\\simulator\\population.py",
+      "accessCount": 1,
+      "lastAccessed": 1779415531910,
+      "type": "file"
+    },
+    {
+      "path": "app\\predictor",
+      "accessCount": 1,
+      "lastAccessed": 1779422128193,
+      "type": "directory"
+    },
+    {
+      "path": "app\\predictor\\__init__.py",
+      "accessCount": 1,
+      "lastAccessed": 1779422135559,
+      "type": "file"
+    },
+    {
+      "path": "tests\\test_predictor_history.py",
+      "accessCount": 1,
+      "lastAccessed": 1779422338646,
+      "type": "file"
+    },
+    {
+      "path": "app\\api\\decision.py",
+      "accessCount": 1,
+      "lastAccessed": 1779423512459,
+      "type": "file"
+    },
+    {
+      "path": "app",
+      "accessCount": 1,
+      "lastAccessed": 1779426226222,
+      "type": "directory"
+    },
+    {
+      "path": "C:\\Users\\leovo\\AppData\\Local\\Temp\\claude\\F--Projects-EchoLens\\12418af4-cc83-446f-b3d8-6abb29e7a3be\\tasks\\b7pxh0tw2.output",
+      "accessCount": 1,
+      "lastAccessed": 1779426758568,
+      "type": "file"
+    },
+    {
+      "path": "app\\services",
+      "accessCount": 1,
+      "lastAccessed": 1779426976269,
+      "type": "directory"
+    },
+    {
+      "path": "C:\\Users\\leovo\\AppData\\Local\\Temp\\claude\\F--Projects-EchoLens\\12418af4-cc83-446f-b3d8-6abb29e7a3be\\tasks\\b18gqyqtp.output",
+      "accessCount": 1,
+      "lastAccessed": 1779427969471,
+      "type": "file"
+    },
+    {
+      "path": "C:\\Users\\leovo\\AppData\\Local\\Temp\\claude\\F--Projects-EchoLens\\12418af4-cc83-446f-b3d8-6abb29e7a3be\\tasks\\bcae4kg9g.output",
+      "accessCount": 1,
+      "lastAccessed": 1779427969508,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

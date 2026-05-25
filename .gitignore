@@ -1,0 +1,58 @@
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+.test_data/
+
+# Node / Vite
+node_modules/
+.vite/
+*.log
+npm-debug.log*
+
+# Frontend build
+frontend/dist/
+
+# Local data / secrets — must never enter git
+.env
+.env.local
+**/data/
+**/uploads/
+**/*.duckdb
+**/kuzu_db/
+backend/.test_data/
+
+# Local report production line (per PRD §A) — NEVER commit
+labs/
+
+# Dockerized output volumes
+**/runs/
+
+# OMC artefacts
+.omc/state/
+.omc/handoffs/
+.claude/settings.local.json
+
+# Tauri (desktop) build artefacts
+frontend/src-tauri/target/
+frontend/src-tauri/gen/
+frontend/src-tauri/Cargo.lock
+
+# Capacitor (Android) build artefacts
+frontend/android/
+frontend/ios/
+frontend/.capacitor/

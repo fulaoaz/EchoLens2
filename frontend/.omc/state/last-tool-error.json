@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"tail -8 \\\"C:/Users/leovo/AppData/Local/Temp/claude/F--Projects-EchoLens/f5595a19-de4f-49ab-9aad-f11d297240df/tasks/bhh7vm8dg.output\\\" ; echo \\\"---backend---\\\" ; tail -8 \\\"C:/Users/leovo/Ap...",
+  "error": "Exit code 1\nERROR: failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.\n---backend---\nERROR: failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.\n---image lis...",
+  "timestamp": "2026-05-21T13:40:57.247Z",
+  "retry_count": 1
+}
