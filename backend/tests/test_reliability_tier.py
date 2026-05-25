@@ -27,7 +27,6 @@ from app.services.reliability_tier import (
     tier_for,
 )
 
-
 # Boundary sample set — kept identical (modulo language) with the matching
 # array in ``useReliabilityTier.spec.ts`` so the two halves of the contract
 # walk through the same values.

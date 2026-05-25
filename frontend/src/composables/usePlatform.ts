@@ -22,8 +22,8 @@ export function detectPlatform(): Platform {
 
   // 检测 Capacitor
   if (typeof window !== 'undefined' && 'Capacitor' in window) {
-    const Capacitor = (window as any).Capacitor
-    if (Capacitor.getPlatform() === 'ios') {
+    const Capacitor = (window as { Capacitor?: { getPlatform: () => string } }).Capacitor
+    if (Capacitor?.getPlatform() === 'ios') {
       return 'capacitor-ios'
     }
     if (Capacitor.getPlatform() === 'android') {

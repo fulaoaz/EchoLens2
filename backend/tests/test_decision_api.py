@@ -16,11 +16,11 @@ from typing import Any
 
 import pytest
 
+from app.kg.search import get_subgraph
 from app.services import prediction_jobs, sim_jobs
 from app.services.crawler_store import get_crawler_store
 from app.services.prediction_jobs import CausalParams, ForecastParams
 from app.services.project_store import get_store
-from app.kg.search import get_subgraph
 
 
 @pytest.fixture(autouse=True)

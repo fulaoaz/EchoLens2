@@ -144,17 +144,17 @@ test.describe('EchoLens 完整业务链路', () => {
       await download.saveAs(downloadPath)
 
       // 验证下载的 HTML 文件存在
-      const fs = require('fs')
-      expect(fs.existsSync(downloadPath)).toBeTruthy()
+      const { existsSync } = await import('fs')
+      expect(existsSync(downloadPath)).toBeTruthy()
     })
 
     // ========== 步骤 7：验证下载的 HTML 中 reliability tier 一致 ==========
     await test.step('验证下载 HTML 中的 reliability tier 与看板一致', async () => {
-      const fs = require('fs')
+      const { readFileSync } = await import('fs')
       const downloadPath = `./e2e/downloads/report.html` // 假设文件名
 
       // 读取 HTML 内容
-      const htmlContent = fs.readFileSync(downloadPath, 'utf-8')
+      const htmlContent = readFileSync(downloadPath, 'utf-8')
 
       // 验证 HTML 中包含正确的 reliability tier class
       if (reliabilityTierSlug) {
