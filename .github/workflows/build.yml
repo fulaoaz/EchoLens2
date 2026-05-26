@@ -11,6 +11,11 @@ on:
       - 'backend/**'
       - '.github/workflows/build.yml'
   workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual artifact build'
+        required: false
+        default: 'manual'
 
 permissions:
   contents: write
