@@ -5,3 +5,4 @@
 # Per-platform bundles
 /icons/*
 !/icons/.gitkeep
+!/icons/icon.ico
