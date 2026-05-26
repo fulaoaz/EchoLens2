@@ -27,7 +27,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["msi", "nsis"],
+    "targets": ["nsis"],
     "icon": ["icons/icon.ico"],
     "category": "DeveloperTool",
     "shortDescription": "EchoLens — public-opinion simulation desktop",
