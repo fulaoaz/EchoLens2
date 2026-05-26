@@ -22,11 +22,12 @@ export function detectPlatform(): Platform {
 
   // 检测 Capacitor
   if (typeof window !== 'undefined' && 'Capacitor' in window) {
-    const Capacitor = (window as { Capacitor?: { getPlatform: () => string } }).Capacitor
-    if (Capacitor?.getPlatform() === 'ios') {
+    const capacitor = (window as { Capacitor?: { getPlatform: () => string } }).Capacitor
+    const platform = capacitor?.getPlatform()
+    if (platform === 'ios') {
       return 'capacitor-ios'
     }
-    if (Capacitor.getPlatform() === 'android') {
+    if (platform === 'android') {
       return 'capacitor-android'
     }
   }
@@ -41,9 +42,7 @@ export const currentPlatform = ref<Platform>(detectPlatform())
 // 平台判断
 export const isWeb = computed(() => currentPlatform.value === 'web')
 export const isTauri = computed(() => currentPlatform.value === 'tauri')
-export const isCapacitor = computed(() =>
-  currentPlatform.value.startsWith('capacitor-'),
-)
+export const isCapacitor = computed(() => currentPlatform.value.startsWith('capacitor-'))
 export const isIOS = computed(() => currentPlatform.value === 'capacitor-ios')
 export const isAndroid = computed(() => currentPlatform.value === 'capacitor-android')
 export const isMobile = computed(() => isIOS.value || isAndroid.value)

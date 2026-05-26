@@ -55,11 +55,7 @@ function matchesShortcut(event: KeyboardEvent, config: ShortcutConfig): boolean 
 function handleGlobalKeydown(event: KeyboardEvent) {
   // 忽略输入框中的快捷键
   const target = event.target as HTMLElement
-  if (
-    target.tagName === 'INPUT' ||
-    target.tagName === 'TEXTAREA' ||
-    target.isContentEditable
-  ) {
+  if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
     return
   }
 

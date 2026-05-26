@@ -25,10 +25,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : 1,
 
   // 测试报告
-  reporter: [
-    ['html', { outputFolder: 'playwright-report' }],
-    ['list'],
-  ],
+  reporter: [['html', { outputFolder: 'playwright-report' }], ['list']],
 
   use: {
     // 基础 URL（假设前端运行在 5173，后端在 5000）

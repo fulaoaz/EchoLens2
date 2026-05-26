@@ -128,10 +128,7 @@ export function usePreferences() {
   }
 
   // 更新单个偏好
-  function updatePreference<K extends keyof UserPreferences>(
-    key: K,
-    value: UserPreferences[K],
-  ) {
+  function updatePreference<K extends keyof UserPreferences>(key: K, value: UserPreferences[K]) {
     preferences.value[key] = value
   }
 

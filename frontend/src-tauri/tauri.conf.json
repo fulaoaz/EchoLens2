@@ -5,7 +5,7 @@
   "identifier": "ai.echolens.desktop",
   "build": {
     "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "VITE_BUILD_TARGET=tauri npm run build",
+    "beforeBuildCommand": "npm run build:tauri",
     "devUrl": "http://localhost:3000",
     "frontendDist": "../dist"
   },
@@ -27,13 +27,8 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["msi", "nsis", "deb", "appimage", "dmg"],
-    "icon": [
-      "icons/32x32.png",
-      "icons/128x128.png",
-      "icons/icon.icns",
-      "icons/icon.ico"
-    ],
+    "targets": ["msi", "nsis"],
+    "icon": ["../public/logo.png"],
     "category": "DeveloperTool",
     "shortDescription": "EchoLens — public-opinion simulation desktop",
     "longDescription": "EchoLens packages crawler + simulation + prediction + causal + decision board into a single desktop app."
