@@ -19,10 +19,24 @@ jobs:
   build-windows:
     name: Build Windows (Tauri)
     runs-on: windows-latest
+    outputs:
+      tauri-project: ${{ steps.tauri-project.outputs.exists }}
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check Tauri project
+        id: tauri-project
+        shell: pwsh
+        run: |
+          if (Test-Path "frontend/src-tauri/tauri.conf.json") {
+            "exists=true" >> $env:GITHUB_OUTPUT
+          } else {
+            "exists=false" >> $env:GITHUB_OUTPUT
+            "Tauri project not found; skipping Windows artifact build." >> $env:GITHUB_STEP_SUMMARY
+          }
+
       - name: Setup Node
+        if: steps.tauri-project.outputs.exists == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -30,13 +44,16 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: Install Rust stable
+        if: steps.tauri-project.outputs.exists == 'true'
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install frontend dependencies
+        if: steps.tauri-project.outputs.exists == 'true'
         working-directory: frontend
         run: npm ci
 
       - name: Build Tauri app
+        if: steps.tauri-project.outputs.exists == 'true'
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -44,6 +61,7 @@ jobs:
           projectPath: frontend
 
       - name: Upload Windows artifacts
+        if: steps.tauri-project.outputs.exists == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: windows-tauri
@@ -55,10 +73,23 @@ jobs:
   build-android:
     name: Build Android (Capacitor)
     runs-on: ubuntu-latest
+    outputs:
+      android-project: ${{ steps.android-project.outputs.exists }}
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check Android project
+        id: android-project
+        run: |
+          if [ -f frontend/android/gradlew ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "Android project not found; skipping APK build." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Setup Node
+        if: steps.android-project.outputs.exists == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -66,31 +97,38 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: Setup Java
+        if: steps.android-project.outputs.exists == 'true'
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
       - name: Setup Android SDK
+        if: steps.android-project.outputs.exists == 'true'
         uses: android-actions/setup-android@v3
 
       - name: Install frontend dependencies
+        if: steps.android-project.outputs.exists == 'true'
         working-directory: frontend
         run: npm ci
 
       - name: Build web app
+        if: steps.android-project.outputs.exists == 'true'
         working-directory: frontend
         run: npm run build
 
       - name: Sync Capacitor
+        if: steps.android-project.outputs.exists == 'true'
         working-directory: frontend
         run: npx cap sync android
 
       - name: Build Android APK
+        if: steps.android-project.outputs.exists == 'true'
         working-directory: frontend/android
         run: ./gradlew assembleRelease
 
       - name: Upload Android artifacts
+        if: steps.android-project.outputs.exists == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: android-capacitor
@@ -105,19 +143,25 @@ jobs:
     steps:
       - name: Summary
         run: |
-          echo "## 🎉 构建完成" >> $GITHUB_STEP_SUMMARY
+          echo "## 构建完成" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "跨平台客户端已构建完成，可在 Artifacts 中下载。" >> $GITHUB_STEP_SUMMARY
+          echo "### 可用平台" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ needs.build-windows.outputs.tauri-project }}" = "true" ]; then
+            echo "- **Windows**: .msi/.exe 安装包（Tauri 桌面端）已上传到 Artifacts" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **Windows**: 已跳过，仓库尚未包含 frontend/src-tauri/tauri.conf.json" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ "${{ needs.build-android.outputs.android-project }}" = "true" ]; then
+            echo "- **Android**: .apk 安装包（Capacitor 移动端）已上传到 Artifacts" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **Android**: 已跳过，仓库尚未包含 frontend/android/gradlew" >> $GITHUB_STEP_SUMMARY
+          fi
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 📦 可用平台" >> $GITHUB_STEP_SUMMARY
-          echo "- **Windows**: .msi 安装包（Tauri 桌面端）" >> $GITHUB_STEP_SUMMARY
-          echo "- **Android**: .apk 安装包（Capacitor 移动端）" >> $GITHUB_STEP_SUMMARY
+          echo "### 注意事项" >> $GITHUB_STEP_SUMMARY
+          echo "- 原生工程目录提交后，对应平台会自动启用构建。" >> $GITHUB_STEP_SUMMARY
+          echo "- 正式 Android 发布需要配置签名密钥。" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 📝 注意事项" >> $GITHUB_STEP_SUMMARY
-          echo "- Android APK 为 debug 签名，仅供测试" >> $GITHUB_STEP_SUMMARY
-          echo "- 正式发布需要配置签名密钥" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🚀 创建正式 Release" >> $GITHUB_STEP_SUMMARY
+          echo "### 创建正式 Release" >> $GITHUB_STEP_SUMMARY
           echo "如需创建正式 Release，请运行：" >> $GITHUB_STEP_SUMMARY
           echo '```bash' >> $GITHUB_STEP_SUMMARY
           echo "git tag v2.0.0-rc1" >> $GITHUB_STEP_SUMMARY

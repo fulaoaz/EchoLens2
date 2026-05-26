@@ -20,7 +20,6 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
       version: ${{ steps.get_version.outputs.version }}
     steps:
       - uses: actions/checkout@v4
@@ -35,27 +34,31 @@ jobs:
           fi
 
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.get_version.outputs.version }}
-          release_name: EchoLens ${{ steps.get_version.outputs.version }}
-          draft: false
-          prerelease: ${{ contains(steps.get_version.outputs.version, 'rc') || contains(steps.get_version.outputs.version, 'beta') || contains(steps.get_version.outputs.version, 'alpha') }}
-          body: |
-            ## EchoLens ${{ steps.get_version.outputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.get_version.outputs.version }}
+        run: |
+          prerelease_flag=""
+          if [[ "$VERSION" == *rc* || "$VERSION" == *beta* || "$VERSION" == *alpha* ]]; then
+            prerelease_flag="--prerelease"
+          fi
+          gh release create "$VERSION" \
+            --title "EchoLens $VERSION" \
+            --notes "$(cat <<EOF
+          ## EchoLens $VERSION
 
-            ### 📦 下载
+          ### 下载
 
-            - **Windows**: `EchoLens_${{ steps.get_version.outputs.version }}_x64.msi` (Tauri 桌面端)
-            - **Android**: `EchoLens_${{ steps.get_version.outputs.version }}.apk` (Capacitor 移动端)
-            - **Docker**: `ghcr.io/zuohenlin/echolens2:${{ steps.get_version.outputs.version }}`
+          - **Docker 后端镜像**: \`ghcr.io/${{ github.repository_owner }}/echolens2-backend:$VERSION\`
+          - **Docker 前端镜像**: \`ghcr.io/${{ github.repository_owner }}/echolens2-frontend:$VERSION\`
+          - **Windows / Android 客户端**: 仅在仓库包含对应原生工程时自动上传。
 
-            ### 📝 更新日志
+          ### 更新日志
 
-            详见 [CHANGELOG.md](https://github.com/zuohenlin/EchoLens2/blob/master/CHANGELOG.md)
+          详见 CHANGELOG.md。
+          EOF
+          )" \
+            $prerelease_flag
 
   build-windows:
     name: Build Windows (Tauri)
@@ -64,7 +67,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check Tauri project
+        id: tauri-project
+        shell: pwsh
+        run: |
+          if (Test-Path "frontend/src-tauri/tauri.conf.json") {
+            "exists=true" >> $env:GITHUB_OUTPUT
+          } else {
+            "exists=false" >> $env:GITHUB_OUTPUT
+            "Tauri project not found; skipping Windows artifact build." >> $env:GITHUB_STEP_SUMMARY
+          }
+
       - name: Setup Node
+        if: steps.tauri-project.outputs.exists == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -72,23 +87,33 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: Install Rust stable
+        if: steps.tauri-project.outputs.exists == 'true'
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install frontend dependencies
+        if: steps.tauri-project.outputs.exists == 'true'
         working-directory: frontend
         run: npm ci
 
       - name: Build Tauri app
+        if: steps.tauri-project.outputs.exists == 'true'
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           projectPath: frontend
-          tagName: ${{ needs.create-release.outputs.version }}
-          releaseName: EchoLens ${{ needs.create-release.outputs.version }}
-          releaseBody: 'See the assets to download and install this version.'
-          releaseDraft: false
-          prerelease: ${{ contains(needs.create-release.outputs.version, 'rc') || contains(needs.create-release.outputs.version, 'beta') || contains(needs.create-release.outputs.version, 'alpha') }}
+
+      - name: Upload Windows artifacts to Release
+        if: steps.tauri-project.outputs.exists == 'true'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.create-release.outputs.version }}
+        run: |
+          $artifacts = Get-ChildItem -Path "frontend/src-tauri/target/release/bundle" -Include *.msi,*.exe -Recurse
+          foreach ($artifact in $artifacts) {
+            gh release upload $env:VERSION $artifact.FullName --clobber
+          }
 
   build-android:
     name: Build Android (Capacitor)
@@ -97,7 +122,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check Android project
+        id: android-project
+        run: |
+          if [ -f frontend/android/gradlew ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "Android project not found; skipping APK build." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Setup Node
+        if: steps.android-project.outputs.exists == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -105,39 +141,45 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: Setup Java
+        if: steps.android-project.outputs.exists == 'true'
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
       - name: Setup Android SDK
+        if: steps.android-project.outputs.exists == 'true'
         uses: android-actions/setup-android@v3
 
       - name: Install frontend dependencies
+        if: steps.android-project.outputs.exists == 'true'
         working-directory: frontend
         run: npm ci
 
       - name: Build web app
+        if: steps.android-project.outputs.exists == 'true'
         working-directory: frontend
         run: npm run build
 
       - name: Sync Capacitor
+        if: steps.android-project.outputs.exists == 'true'
         working-directory: frontend
         run: npx cap sync android
 
       - name: Build Android APK
+        if: steps.android-project.outputs.exists == 'true'
         working-directory: frontend/android
         run: ./gradlew assembleRelease
 
       - name: Upload Android APK to Release
-        uses: actions/upload-release-asset@v1
+        if: steps.android-project.outputs.exists == 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: frontend/android/app/build/outputs/apk/release/app-release.apk
-          asset_name: EchoLens_${{ needs.create-release.outputs.version }}.apk
-          asset_content_type: application/vnd.android.package-archive
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.create-release.outputs.version }}
+        run: |
+          gh release upload "$VERSION" \
+            frontend/android/app/build/outputs/apk/release/app-release.apk#EchoLens_${VERSION}.apk \
+            --clobber
 
   build-docker:
     name: Build and Push Docker Images
@@ -154,6 +196,9 @@ jobs:
             dockerfile: frontend/Dockerfile
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -187,40 +232,3 @@ jobs:
           cache-from: type=gha,scope=${{ matrix.image }}
           cache-to: type=gha,mode=max,scope=${{ matrix.image }}
           platforms: linux/amd64,linux/arm64
-
-  build-docker-compose:
-    name: Build Full Stack Docker Image
-    needs: create-release
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ghcr.io/${{ github.repository_owner }}/echolens2
-          tags: |
-            type=semver,pattern={{version}},value=${{ needs.create-release.outputs.version }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ needs.create-release.outputs.version }}
-            type=semver,pattern={{major}},value=${{ needs.create-release.outputs.version }}
-            type=raw,value=latest,enable={{is_default_branch}}
-
-      - name: Build and push full stack image
-        run: |
-          docker buildx bake -f docker-compose.yml --push \
-            --set "*.platform=linux/amd64,linux/arm64" \
-            --set "*.cache-from=type=gha" \
-            --set "*.cache-to=type=gha,mode=max"
-        env:
-          DOCKER_BUILDKIT: 1
