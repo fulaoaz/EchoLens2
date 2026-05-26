@@ -55,8 +55,14 @@ frontend/src-tauri/target/
 frontend/src-tauri/gen/
 frontend/src-tauri/Cargo.lock
 
-# Capacitor (Android/iOS) build artefacts
-frontend/android/
+# Capacitor mobile build artefacts
+frontend/android/.gradle/
+frontend/android/**/build/
+frontend/android/local.properties
+frontend/android/app/src/main/assets/public/
+frontend/android/app/src/main/assets/capacitor.config.json
+frontend/android/app/src/main/assets/capacitor.plugins.json
+frontend/android/app/src/main/res/xml/config.xml
 frontend/ios/
 frontend/.capacitor/
 

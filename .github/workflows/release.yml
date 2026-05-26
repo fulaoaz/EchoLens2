@@ -145,7 +145,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
 
       - name: Setup Android SDK
         if: steps.android-project.outputs.exists == 'true'
@@ -159,7 +159,7 @@ jobs:
       - name: Build web app
         if: steps.android-project.outputs.exists == 'true'
         working-directory: frontend
-        run: npm run build
+        run: npm run build:capacitor
 
       - name: Sync Capacitor
         if: steps.android-project.outputs.exists == 'true'
@@ -177,9 +177,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ needs.create-release.outputs.version }}
         run: |
-          gh release upload "$VERSION" \
-            frontend/android/app/build/outputs/apk/release/app-release.apk#EchoLens_${VERSION}.apk \
-            --clobber
+          for artifact in frontend/android/app/build/outputs/apk/release/*.apk; do
+            gh release upload "$VERSION" "$artifact#EchoLens_${VERSION}_android.apk" --clobber
+          done
 
   build-docker:
     name: Build and Push Docker Images
