@@ -112,7 +112,15 @@ jobs:
         run: |
           $artifacts = Get-ChildItem -Path "frontend/src-tauri/target/release/bundle" -Include *.msi,*.exe -Recurse
           foreach ($artifact in $artifacts) {
-            gh release upload $env:VERSION $artifact.FullName --clobber
+            if ($artifact.Extension -eq ".msi") {
+              $releaseName = "EchoLens_${env:VERSION}_windows_x64.msi"
+            } elseif ($artifact.Extension -eq ".exe") {
+              $releaseName = "EchoLens_${env:VERSION}_windows_setup.exe"
+            } else {
+              continue
+            }
+            Copy-Item $artifact.FullName $releaseName -Force
+            gh release upload $env:VERSION $releaseName --clobber
           }
 
   build-android:
