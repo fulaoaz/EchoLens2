@@ -178,7 +178,9 @@ jobs:
           VERSION: ${{ needs.create-release.outputs.version }}
         run: |
           for artifact in frontend/android/app/build/outputs/apk/release/*.apk; do
-            gh release upload "$VERSION" "$artifact#EchoLens_${VERSION}_android.apk" --clobber
+            release_name="EchoLens_${VERSION}_android.apk"
+            cp "$artifact" "$release_name"
+            gh release upload "$VERSION" "$release_name" --clobber
           done
 
   build-docker:
