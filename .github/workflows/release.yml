@@ -185,11 +185,14 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ needs.create-release.outputs.version }}
         run: |
-          for artifact in frontend/android/app/build/outputs/apk/release/*.apk; do
-            release_name="EchoLens_${VERSION}_android.apk"
-            cp "$artifact" "$release_name"
-            gh release upload "$VERSION" "$release_name" --clobber
-          done
+          artifact="frontend/android/app/build/outputs/apk/release/app-release.apk"
+          if [ ! -f "$artifact" ]; then
+            echo "Signed release APK not found: $artifact" >&2
+            exit 1
+          fi
+          release_name="EchoLens_${VERSION}_android.apk"
+          cp "$artifact" "$release_name"
+          gh release upload "$VERSION" "$release_name" --clobber
 
   build-docker:
     name: Build and Push Docker Images

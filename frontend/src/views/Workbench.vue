@@ -24,6 +24,7 @@ import {
   SparklesOutline,
   AnalyticsOutline,
   RefreshOutline,
+  SettingsOutline,
   TrashOutline,
 } from '@vicons/ionicons5'
 import { useRouter } from 'vue-router'
@@ -106,6 +107,10 @@ const goProject = (id: string): unknown => router.push({ name: 'project-detail',
         <NTag size="small" type="info" round>电子商务大数据分析</NTag>
       </div>
       <NSpace>
+        <NButton quaternary @click="router.push({ name: 'settings' })">
+          <template #icon><NIcon :component="SettingsOutline" /></template>
+          系统设置
+        </NButton>
         <NButton circle quaternary :loading="store.loading" @click="store.refresh()">
           <template #icon><NIcon :component="RefreshOutline" /></template>
         </NButton>

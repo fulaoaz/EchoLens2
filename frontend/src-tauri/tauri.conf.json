@@ -22,15 +22,29 @@
       }
     ],
     "security": {
-      "csp": "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' http://localhost:5001 ipc: https://ipc.localhost"
+      "csp": "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' http: https: ipc: https://ipc.localhost"
     }
   },
   "bundle": {
     "active": true,
     "targets": ["nsis"],
     "icon": ["icons/icon.ico"],
+    "publisher": "EchoLens Team",
+    "homepage": "https://github.com/zuohenlin/EchoLens2",
+    "copyright": "Copyright © 2026 EchoLens Team. All rights reserved.",
+    "license": "AGPL-3.0-only",
+    "licenseFile": "LICENSE.txt",
     "category": "DeveloperTool",
-    "shortDescription": "EchoLens — public-opinion simulation desktop",
-    "longDescription": "EchoLens packages crawler + simulation + prediction + causal + decision board into a single desktop app."
+    "shortDescription": "EchoLens — 电商舆情仿真与决策分析客户端",
+    "longDescription": "EchoLens 2.0 集成材料采集、舆情仿真、趋势预测、因果推断、决策看板和证据报告，适用于电商大数据分析与创新创业项目展示。",
+    "windows": {
+      "nsis": {
+        "languages": ["SimpChinese"],
+        "displayLanguageSelector": false,
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico",
+        "installMode": "currentUser"
+      }
+    }
   }
 }

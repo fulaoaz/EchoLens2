@@ -15,16 +15,13 @@ const config: CapacitorConfig = {
   webDir: 'dist',
   bundledWebRuntime: false,
   android: {
-    allowMixedContent: false,
+    allowMixedContent: true,
     captureInput: true,
     webContentsDebuggingEnabled: false,
   },
   server: {
     androidScheme: 'https',
-    // For dev against a LAN-reachable backend, set:
-    //   url: 'http://10.0.2.2:5001'   // Android emulator → host loopback
-    //   cleartext: true
-    cleartext: false,
+    cleartext: true,
   },
 }
 

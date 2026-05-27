@@ -118,6 +118,7 @@ def _register_blueprints(app: Flask) -> None:
     from app.api.prediction import bp as prediction_bp
     from app.api.projects import bp as projects_bp
     from app.api.report import bp as report_bp
+    from app.api.settings import bp as settings_bp
     from app.api.simulation import bp as simulation_bp
 
     for bp in (
@@ -127,6 +128,7 @@ def _register_blueprints(app: Flask) -> None:
         prediction_bp,
         decision_bp,
         report_bp,
+        settings_bp,
     ):
         app.register_blueprint(bp)
 

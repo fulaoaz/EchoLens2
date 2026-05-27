@@ -139,7 +139,7 @@ jobs:
         with:
           name: android-capacitor
           path: |
-            frontend/android/app/build/outputs/apk/release/*.apk
+            frontend/android/app/build/outputs/apk/release/app-release.apk
           retention-days: 7
 
   summary:

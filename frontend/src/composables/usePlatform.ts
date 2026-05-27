@@ -151,26 +151,42 @@ async function pickFilesWeb(options: FilePickerOptions): Promise<PickedFile[]> {
   })
 }
 
+const API_BASE_URL_STORAGE_KEY = 'echolens-api-base-url'
+
+export function getStoredApiBaseUrl(): string {
+  if (typeof window === 'undefined') return ''
+  return localStorage.getItem(API_BASE_URL_STORAGE_KEY) ?? ''
+}
+
+export function setStoredApiBaseUrl(value: string): void {
+  if (typeof window === 'undefined') return
+  const normalized = value.trim().replace(/\/+$/, '')
+  if (normalized) {
+    localStorage.setItem(API_BASE_URL_STORAGE_KEY, normalized)
+  } else {
+    localStorage.removeItem(API_BASE_URL_STORAGE_KEY)
+  }
+}
+
 // 网络请求基础 URL
 export function getApiBaseUrl(): string {
+  const stored = getStoredApiBaseUrl()
+  if (stored) return stored
+
   const platform = currentPlatform.value
 
   if (platform === 'tauri') {
-    // Tauri 桌面端连接本地后端
     return 'http://localhost:5001'
   }
 
   if (platform === 'capacitor-android') {
-    // Android 模拟器访问宿主机
     return 'http://10.0.2.2:5001'
   }
 
   if (platform === 'capacitor-ios') {
-    // iOS 模拟器访问宿主机
     return 'http://localhost:5001'
   }
 
-  // Web 平台使用相对路径或环境变量
   return import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'
 }
 
