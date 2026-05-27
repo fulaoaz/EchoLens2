@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="EchoLens 2.0 文档中心：快速开始、部署、API、用户手册、品牌指南与客户端下载。" />
+    <meta name="description" content="EchoLens 2.0 文档中心：站内阅读快速开始、部署、API、用户手册、品牌指南、发布与构建说明。" />
     <title>文档中心 · EchoLens 2.0</title>
     <link rel="icon" href="./assets/logo.png" />
     <script>
@@ -23,7 +23,7 @@
         <img src="./assets/logo.png" alt="EchoLens Logo" width="52" height="52" />
         <span>
           <strong>EchoLens 2.0</strong>
-          <small>Documentation Desk</small>
+          <small>文档中心</small>
         </span>
       </a>
       <div class="header-actions">
@@ -35,85 +35,86 @@
         </nav>
         <button class="theme-toggle" type="button" aria-label="切换明暗主题" data-theme-toggle>
           <span data-theme-icon>●</span>
-          <strong data-theme-label>Theme</strong>
+          <strong data-theme-label>主题</strong>
         </button>
       </div>
     </header>
 
     <main id="main-content">
       <section class="docs-hero section-shell">
-        <div class="docs-label">Docs / Release / Operations</div>
+        <div class="docs-label">文档 / 发布 / 部署</div>
         <div class="docs-hero-grid">
           <div>
-            <p class="eyebrow">Documentation hub</p>
-            <h1>把安装、接口、手册和交付资料放在一张索引桌上。</h1>
+            <p class="eyebrow">文档中心</p>
+            <h1>EchoLens 2.0 文档中心</h1>
+            <p>
+              从快速开始到部署交付，集中查阅产品能力、操作流程、接口说明、客户端发布与品牌资料。
+            </p>
           </div>
           <aside class="doc-route-card" aria-label="推荐阅读路径">
-            <span>Recommended path</span>
+            <span>推荐阅读</span>
             <ol>
-              <li>先用 README 跑通本地启动。</li>
-              <li>再读用户手册理解业务链路。</li>
-              <li>部署或集成前看 API 与部署指南。</li>
+              <li>快速开始：了解项目定位、运行方式和核心能力。</li>
+              <li>用户手册：熟悉采集、仿真、预测、决策和报告流程。</li>
+              <li>交付资料：核对部署、发布、构建和品牌规范。</li>
             </ol>
           </aside>
         </div>
       </section>
 
-      <section class="section-shell release-dossier">
+      <section class="section-shell docs-console" aria-label="文档筛选和状态">
         <div>
-          <p class="eyebrow">Latest release</p>
-          <h2>v2.0.0-rc1 已提供 Windows 与 Android 客户端。</h2>
-          <p>官网只保留稳定入口，具体接口、部署和用户操作细节继续由仓库文档维护，确保信息随代码同步演进。</p>
+          <p class="eyebrow">文档索引</p>
+          <h2>按主题查阅项目资料。</h2>
+          <p>使用搜索快速定位部署、接口、报告、品牌等内容，或从目录进入对应章节。</p>
         </div>
-        <a class="button primary" href="https://github.com/fulaoaz/EchoLens2/releases/tag/v2.0.0-rc1">查看 Release</a>
+        <form class="docs-search" role="search" aria-label="筛选文档">
+          <label for="docs-search-input">搜索文档</label>
+          <input id="docs-search-input" type="search" placeholder="搜索：部署、API、报告、品牌…" data-doc-search />
+        </form>
       </section>
 
-      <section class="section-shell document-wall" aria-label="文档入口">
-        <a class="doc-tile feature" href="https://github.com/fulaoaz/EchoLens2/blob/master/README.md">
-          <span>Start</span>
-          <strong>项目 README</strong>
-          <p>产品定位、核心特性、技术栈、快速开始命令和客户端发布状态。</p>
-        </a>
-        <a class="doc-tile" href="https://github.com/fulaoaz/EchoLens2/blob/master/DEPLOYMENT.md">
-          <span>Deploy</span>
-          <strong>部署指南</strong>
-          <p>Docker Compose、本地开发、Tauri 桌面端与 Capacitor 移动端部署。</p>
-        </a>
-        <a class="doc-tile" href="https://github.com/fulaoaz/EchoLens2/blob/master/docs/API.md">
-          <span>API</span>
-          <strong>接口文档</strong>
-          <p>后端接口、请求结构、响应字段和常见集成方式。</p>
-        </a>
-        <a class="doc-tile tall" href="https://github.com/fulaoaz/EchoLens2/blob/master/docs/USER_MANUAL.md">
-          <span>Manual</span>
-          <strong>用户手册</strong>
-          <p>按业务流程了解项目创建、采集、仿真、预测、决策和报告下载。</p>
-        </a>
-        <a class="doc-tile" href="https://github.com/fulaoaz/EchoLens2/blob/master/docs/BRAND_GUIDE.md">
-          <span>Brand</span>
-          <strong>品牌指南</strong>
-          <p>统一 EchoLens 对外展示的 Logo、色彩、命名和视觉风格。</p>
-        </a>
-        <a class="doc-tile" href="https://github.com/fulaoaz/EchoLens2/releases/tag/v2.0.0-rc1">
-          <span>Release</span>
-          <strong>客户端下载</strong>
-          <p>获取当前预发布的 Windows NSIS 安装包和 Android APK。</p>
-        </a>
-        <a class="doc-tile" href="https://github.com/fulaoaz/EchoLens2/actions">
-          <span>CI</span>
-          <strong>构建状态</strong>
-          <p>查看 CI、Docker、Build Artifacts 和 GitHub Pages 部署运行情况。</p>
-        </a>
-        <a class="doc-tile" href="https://github.com/fulaoaz/EchoLens2/blob/master/docs/kg-spike-report.md">
-          <span>KG</span>
-          <strong>知识图谱 Spike</strong>
-          <p>图谱构建、检索增强和证据链探索相关技术记录。</p>
-        </a>
-        <a class="doc-tile accent" href="./index.html">
-          <span>Site</span>
-          <strong>官网首页</strong>
-          <p>返回产品落地页，查看工作流、架构、客户端和报告能力概览。</p>
-        </a>
+      <section class="section-shell docs-app-shell" aria-label="站内文档阅读器">
+        <aside class="docs-left-rail" aria-label="文档导航">
+          <div class="docs-rail-title">
+            <span>目录</span>
+            <strong>文档导航</strong>
+          </div>
+          <nav class="docs-tree" data-doc-list aria-label="文档列表">
+            <a href="#start" data-doc-card="start"><span>00</span><strong>快速开始</strong><small>产品定位与启动路径</small></a>
+            <a href="#deploy" data-doc-card="deploy"><span>01</span><strong>部署指南</strong><small>服务部署与客户端配置</small></a>
+            <a href="#api" data-doc-card="api"><span>02</span><strong>接口文档</strong><small>接口分层与业务边界</small></a>
+            <a href="#manual" data-doc-card="manual"><span>03</span><strong>用户手册</strong><small>业务流程与操作说明</small></a>
+            <a href="#brand" data-doc-card="brand"><span>04</span><strong>品牌指南</strong><small>标识、色彩与表达规范</small></a>
+            <a href="#release" data-doc-card="release"><span>05</span><strong>客户端下载</strong><small>Windows 与 Android</small></a>
+            <a href="#ci" data-doc-card="ci"><span>06</span><strong>构建状态</strong><small>自动构建与页面部署</small></a>
+            <a href="#kg" data-doc-card="kg"><span>07</span><strong>知识图谱 Spike</strong><small>图谱与证据链</small></a>
+            <a href="#site" data-doc-card="site"><span>08</span><strong>官网说明</strong><small>页面、主题与发布检查</small></a>
+          </nav>
+        </aside>
+
+        <article class="docs-article" tabindex="-1" data-doc-reader>
+          <nav class="docs-breadcrumb" aria-label="面包屑">
+            <a href="./index.html">EchoLens</a>
+            <span>/</span>
+            <span>文档</span>
+            <span>/</span>
+            <strong data-doc-crumb>快速开始</strong>
+          </nav>
+          <div class="docs-article-head">
+            <p class="eyebrow" data-doc-kicker>Start</p>
+            <h2 data-doc-title>快速开始</h2>
+            <p data-doc-summary>产品定位、核心特性、技术栈和快速开始。</p>
+            <div class="reader-meta" data-doc-meta></div>
+          </div>
+          <div class="reader-body" data-doc-body></div>
+          <div class="docs-pager" data-doc-pager></div>
+        </article>
+
+        <aside class="docs-right-rail" aria-label="当前文档目录">
+          <span>本页目录</span>
+          <ol data-doc-toc></ol>
+        </aside>
       </section>
     </main>
 
@@ -138,6 +139,220 @@
           render()
         })
         render()
+      })()
+    </script>
+    <script>
+      ;(() => {
+        const docs = [
+          {
+            id: 'start',
+            index: '00',
+            kicker: 'Start here',
+            title: '快速开始',
+            summary: '用最短路径理解 EchoLens 2.0 的定位、能力边界和启动方式。',
+            meta: ['推荐首读', '10 分钟', '产品 / 开发'],
+            sections: [
+              ['适合谁读', '产品负责人、开发者、评审老师和需要快速了解项目价值的人。'],
+              ['平台定位', 'EchoLens 2.0 面向电商舆情，把材料上传、评论采集、知识图谱、多智能体仿真、预测分析、决策看板和证据报告串成一条可复核链路。'],
+              ['启动路径', '开发环境通常先启动后端 Flask API，再启动前端 Vite；生产或演示环境优先使用 Docker Compose 和预构建客户端。'],
+              ['下一步', '部署看「部署指南」，接口集成看「接口文档」，业务演示看「用户手册」。'],
+            ],
+          },
+          {
+            id: 'deploy',
+            index: '01',
+            kicker: 'Operations',
+            title: '部署指南',
+            summary: '把本地开发、Docker Compose、桌面端和移动端发布路径放在同一张操作单里。',
+            meta: ['运维优先', '15 分钟', 'Docker / Tauri / Capacitor'],
+            sections: [
+              ['环境准备', '准备 Python 3.11+、Node.js、Docker，以及 LLM 和图谱相关环境变量。开发机可以分别启动 backend 与 frontend。'],
+              ['Docker 路径', '使用 docker compose up 启动服务；EchoLens-Insight 预构建镜像地址应指向 ghcr.io/fulaoaz/echolens-insight。'],
+              ['桌面端', 'Tauri Windows 安装器包含中文安装指引、版权说明和应用图标，系统设置页用于配置后端地址、模型提供商和 API Key。'],
+              ['移动端', 'Android 使用 Capacitor 打包 APK，移动端复用项目、采集、仿真、决策和报告链路。'],
+            ],
+          },
+          {
+            id: 'api',
+            index: '02',
+            kicker: 'Integration',
+            title: '接口文档',
+            summary: '按业务阶段理解后端 API：项目、采集、仿真、预测、决策和报告。',
+            meta: ['集成参考', '12 分钟', 'REST'],
+            sections: [
+              ['接口分层', '前端通过 REST API 访问 Flask 后端。接口围绕项目管理、图谱构建、仿真运行、预测分析、决策汇总和报告下载组织。'],
+              ['请求边界', '用户输入、上传材料、外部 LLM、图谱服务和仿真任务是主要边界；系统应在这些边界处理失败与状态回传。'],
+              ['响应结构', '接口通常返回业务数据、运行状态、错误信息和可追溯的 run 标识，便于前端把结论连接回原始运行记录。'],
+              ['集成建议', '先跑通项目详情页完整链路，再逐个集成 API；报告接口要重点核对证据链、置信度和下载格式。'],
+            ],
+          },
+          {
+            id: 'manual',
+            index: '03',
+            kicker: 'Workflow',
+            title: '用户手册',
+            summary: '从创建项目到下载报告，按真实业务动作完成一次 EchoLens 分析。',
+            meta: ['演示必读', '20 分钟', '业务流程'],
+            sections: [
+              ['创建项目', '录入商品、竞品、关键词和分析目标，为后续材料采集与仿真设定上下文。'],
+              ['材料与采集', '上传 PDF、Markdown、TXT 等材料，补充评论与话题样本，为图谱和证据链提供原始信息。'],
+              ['图谱与仿真', '系统抽取品牌、卖点、KOL、情绪和证据片段，再运行多智能体传播仿真与预测实验。'],
+              ['决策与报告', '决策看板汇总收益、风险、可靠性和关键路径；报告导出 HTML / Markdown，并保留结论到证据的反查链。'],
+            ],
+          },
+          {
+            id: 'brand',
+            index: '04',
+            kicker: 'Identity',
+            title: '品牌指南',
+            summary: '让官网、客户端、安装器和报告保持一致的 EchoLens 对外形象。',
+            meta: ['视觉规范', '8 分钟', 'Logo / 色彩 / 文案'],
+            sections: [
+              ['命名', '统一使用 EchoLens 2.0，中文语境可配合“回声透镜”或“电商舆情智能体决策平台”。'],
+              ['Logo', '官网、Windows 安装包、Android APK 和客户端图标应使用同一套品牌资产，避免默认框架图标残留。'],
+              ['色彩', '当前官网采用编辑部式纸面底色、强对比黑线、青绿/粉红/黄色强调色，并提供深色主题。'],
+              ['语气', '强调“证据优先、可复核、可追责”，少用泛泛的数据大屏措辞。'],
+            ],
+          },
+          {
+            id: 'release',
+            index: '05',
+            kicker: 'Release',
+            title: '客户端下载',
+            summary: '当前预发布版本提供 Windows 安装器和 Android APK。',
+            meta: ['交付入口', '5 分钟', 'v2.0.0-rc1'],
+            sections: [
+              ['Windows', '下载 NSIS 中文安装包，安装后可在系统设置中配置后端地址、LLM Base URL、模型名称和 API Key。'],
+              ['Android', '下载 APK 后安装，移动端共享项目、采集、仿真、决策和报告链路。'],
+              ['版本说明', 'v2.0.0-rc1 是预发布版本，适合演示、评审和功能验证；生产部署前应确认后端服务和模型配置。'],
+              ['发布检查', '检查图标、版权说明、安装指引、配置页、下载链接和 Release 附件是否一致。'],
+            ],
+          },
+          {
+            id: 'ci',
+            index: '06',
+            kicker: 'Automation',
+            title: '构建状态',
+            summary: '理解 GitHub Actions 如何构建客户端、Docker 镜像和 GitHub Pages。',
+            meta: ['工程交付', '10 分钟', 'Actions / Pages'],
+            sections: [
+              ['Pages', 'docs 目录作为静态站点根目录，由 GitHub Pages workflow 上传并部署。'],
+              ['客户端', '构建流水线产出 Windows 安装器和 Android APK，并通过 Release 附件交付。'],
+              ['Docker', 'EchoLens-Insight 预构建镜像发布到 GHCR，部署文件引用 ghcr.io/fulaoaz/echolens-insight。'],
+              ['验证', '每次改官网或文档页后，应检查首页、文档页、主题切换、关键 DOM 标记和移动端响应式。'],
+            ],
+          },
+          {
+            id: 'kg',
+            index: '07',
+            kicker: 'Evidence graph',
+            title: '知识图谱 Spike',
+            summary: '记录图谱构建、检索增强和证据链探索中的关键发现。',
+            meta: ['技术记录', '12 分钟', 'Kuzu / LightRAG / Evidence'],
+            sections: [
+              ['图谱目标', '把商品材料、评论、实体、情绪和传播节点组织成可查询结构，为分析与报告提供证据。'],
+              ['检索增强', '报告和决策建议不只输出结论，还需要绑定来源片段、运行记录和可靠性等级。'],
+              ['可追溯性', 'Run chip、证据片段和报告锚点构成反查链，减少“结论合理但无法复盘”的风险。'],
+              ['下一步', '继续强化图谱实体质量、证据覆盖率、可靠性分层和报告端可读性。'],
+            ],
+          },
+          {
+            id: 'site',
+            index: '08',
+            kicker: 'Site guide',
+            title: '官网说明',
+            summary: '站点自身的导航、主题、文档阅读和上线检查清单。',
+            meta: ['站点说明', '6 分钟', 'GitHub Pages'],
+            sections: [
+              ['首页', '首页负责讲清价值、流程、工作台、客户端和证据报告能力。'],
+              ['文档中心', '文档中心汇总快速开始、部署、接口、用户手册、发布、构建和品牌资料，便于按主题查阅。'],
+              ['主题', '明暗主题通过 data-theme 和 localStorage 维护，同一偏好在首页与文档页共享。'],
+              ['发布后检查', '确认 URL、Logo、下载链接、GitHub 用户名、主题切换、键盘焦点和移动端布局都正常。'],
+            ],
+          },
+        ]
+
+        const byId = new Map(docs.map((doc) => [doc.id, doc]))
+        const cards = Array.from(document.querySelectorAll('[data-doc-card]'))
+        const search = document.querySelector('[data-doc-search]')
+        const reader = document.querySelector('[data-doc-reader]')
+        const crumb = document.querySelector('[data-doc-crumb]')
+        const kicker = document.querySelector('[data-doc-kicker]')
+        const title = document.querySelector('[data-doc-title]')
+        const summary = document.querySelector('[data-doc-summary]')
+        const meta = document.querySelector('[data-doc-meta]')
+        const body = document.querySelector('[data-doc-body]')
+        const pager = document.querySelector('[data-doc-pager]')
+        const toc = document.querySelector('[data-doc-toc]')
+
+        const renderDoc = (id) => {
+          const doc = byId.get(id) || docs[0]
+          const currentIndex = docs.findIndex((item) => item.id === doc.id)
+          const prev = docs[currentIndex - 1]
+          const next = docs[currentIndex + 1]
+          cards.forEach((card) => {
+            const selected = card.dataset.docCard === doc.id
+            card.classList.toggle('is-active', selected)
+            card.setAttribute('aria-current', selected ? 'page' : 'false')
+          })
+          if (crumb) crumb.textContent = doc.title
+          if (kicker) kicker.textContent = `${doc.index} / ${doc.kicker}`
+          if (title) title.textContent = doc.title
+          if (summary) summary.textContent = doc.summary
+          if (meta) meta.innerHTML = doc.meta.map((item) => `<span>${item}</span>`).join('')
+          if (body) {
+            body.innerHTML = doc.sections
+              .map(
+                ([heading, content], index) => `
+                  <section id="${doc.id}-section-${index + 1}">
+                    <h3>${heading}</h3>
+                    <p>${content}</p>
+                  </section>
+                `,
+              )
+              .join('')
+          }
+          if (toc) {
+            toc.innerHTML = doc.sections
+              .map(([heading], index) => `<li><a href="#${doc.id}-section-${index + 1}">${heading}</a></li>`)
+              .join('')
+          }
+          if (pager) {
+            pager.innerHTML = `
+              ${prev ? `<a href="#${prev.id}"><span>上一页</span><strong>${prev.title}</strong></a>` : '<span></span>'}
+              ${next ? `<a href="#${next.id}"><span>下一页</span><strong>${next.title}</strong></a>` : '<span></span>'}
+            `
+          }
+          reader?.focus({ preventScroll: true })
+        }
+
+        const activateFromHash = () => {
+          const hash = window.location.hash.replace('#', '')
+          if (!hash) {
+            renderDoc('start')
+            return
+          }
+          if (byId.has(hash)) {
+            renderDoc(hash)
+            return
+          }
+          const sectionDoc = docs.find((doc) => hash.startsWith(`${doc.id}-section-`))
+          if (sectionDoc) {
+            renderDoc(sectionDoc.id)
+            requestAnimationFrame(() => document.getElementById(hash)?.scrollIntoView())
+          }
+        }
+
+        search?.addEventListener('input', () => {
+          const query = search.value.trim().toLowerCase()
+          cards.forEach((card) => {
+            const text = card.textContent.toLowerCase()
+            card.hidden = query.length > 0 && !text.includes(query)
+          })
+        })
+
+        window.addEventListener('hashchange', activateFromHash)
+        activateFromHash()
       })()
     </script>
   </body>
