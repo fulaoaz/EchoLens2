@@ -39,7 +39,10 @@ export const settingsApi = {
   },
 
   async update(input: UpdateRuntimeSettingsInput): Promise<RuntimeSettings> {
-    const resp = await client().put<ApiEnvelope<RuntimeSettings> | RuntimeSettings>('/settings', input)
+    const resp = await client().put<ApiEnvelope<RuntimeSettings> | RuntimeSettings>(
+      '/settings',
+      input,
+    )
     return unwrap(resp.data)
   },
 }
