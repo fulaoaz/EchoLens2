@@ -6,97 +6,112 @@
     <meta name="description" content="EchoLens 2.0 文档中心：快速开始、部署、API、用户手册、品牌指南与客户端下载。" />
     <title>文档中心 · EchoLens 2.0</title>
     <link rel="icon" href="./assets/logo.png" />
+    <script>
+      ;(() => {
+        const saved = localStorage.getItem('echolens-pages-theme')
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        document.documentElement.dataset.theme = saved || (prefersDark ? 'dark' : 'light')
+      })()
+    </script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body class="docs-page">
     <a class="skip-link" href="#main-content">跳到主要内容</a>
-    <header class="site-header compact">
+
+    <header class="site-header compact" aria-label="站点顶部导航">
       <a class="brand" href="./index.html" aria-label="EchoLens 首页">
-        <img src="./assets/logo.png" alt="EchoLens Logo" />
+        <img src="./assets/logo.png" alt="EchoLens Logo" width="52" height="52" />
         <span>
           <strong>EchoLens 2.0</strong>
-          <small>Documentation Hub</small>
+          <small>Documentation Desk</small>
         </span>
       </a>
-      <nav class="nav" aria-label="主导航">
-        <a href="./index.html#workflow">流程</a>
-        <a href="./index.html#architecture">架构</a>
-        <a href="./index.html#clients">客户端</a>
-        <a class="nav-pill" href="https://github.com/zuohenlin/EchoLens2">GitHub</a>
-      </nav>
+      <div class="header-actions">
+        <nav class="nav" aria-label="主导航">
+          <a href="./index.html#story">价值</a>
+          <a href="./index.html#workflow">流程</a>
+          <a href="./index.html#download">下载</a>
+          <a href="https://github.com/zuohenlin/EchoLens2">GitHub</a>
+        </nav>
+        <button class="theme-toggle" type="button" aria-label="切换明暗主题" data-theme-toggle>
+          <span data-theme-icon>●</span>
+          <strong data-theme-label>Theme</strong>
+        </button>
+      </div>
     </header>
 
     <main id="main-content">
       <section class="docs-hero section-shell">
-        <p class="eyebrow">Docs</p>
-        <h1>从本地启动到生产发布的最短路径。</h1>
-        <p>
-          这里整理 EchoLens 2.0 的核心文档入口。官网只保存稳定导航，具体接口、部署和用户操作细节继续由仓库文档维护，确保信息与代码同步演进。
-        </p>
-      </section>
-
-      <section class="section-shell docs-overview">
-        <div class="doc-callout">
-          <span>Recommended Path</span>
-          <h2>第一次使用建议按这个顺序阅读。</h2>
-          <ol>
-            <li>先看 README 理解产品定位和本地启动方式。</li>
-            <li>再看用户手册熟悉项目、采集、仿真、预测、决策和报告链路。</li>
-            <li>需要集成或部署时查看 API 文档与部署指南。</li>
-          </ol>
-        </div>
-        <div class="doc-release-card">
-          <span>Latest Release</span>
-          <strong>v2.0.0-rc1</strong>
-          <p>已发布 Windows 中文安装包与 Android 可安装 APK。</p>
-          <a class="button primary" href="https://github.com/zuohenlin/EchoLens2/releases/tag/v2.0.0-rc1">查看下载</a>
+        <div class="docs-label">Docs / Release / Operations</div>
+        <div class="docs-hero-grid">
+          <div>
+            <p class="eyebrow">Documentation hub</p>
+            <h1>把安装、接口、手册和交付资料放在一张索引桌上。</h1>
+          </div>
+          <aside class="doc-route-card" aria-label="推荐阅读路径">
+            <span>Recommended path</span>
+            <ol>
+              <li>先用 README 跑通本地启动。</li>
+              <li>再读用户手册理解业务链路。</li>
+              <li>部署或集成前看 API 与部署指南。</li>
+            </ol>
+          </aside>
         </div>
       </section>
 
-      <section class="section-shell docs-grid" aria-label="文档入口">
-        <a class="doc-card" href="https://github.com/zuohenlin/EchoLens2/blob/master/README.md">
+      <section class="section-shell release-dossier">
+        <div>
+          <p class="eyebrow">Latest release</p>
+          <h2>v2.0.0-rc1 已提供 Windows 与 Android 客户端。</h2>
+          <p>官网只保留稳定入口，具体接口、部署和用户操作细节继续由仓库文档维护，确保信息随代码同步演进。</p>
+        </div>
+        <a class="button primary" href="https://github.com/zuohenlin/EchoLens2/releases/tag/v2.0.0-rc1">查看 Release</a>
+      </section>
+
+      <section class="section-shell document-wall" aria-label="文档入口">
+        <a class="doc-tile feature" href="https://github.com/zuohenlin/EchoLens2/blob/master/README.md">
           <span>Start</span>
-          <h2>项目 README</h2>
-          <p>了解产品定位、核心特性、技术栈、快速开始命令和客户端发布状态。</p>
+          <strong>项目 README</strong>
+          <p>产品定位、核心特性、技术栈、快速开始命令和客户端发布状态。</p>
         </a>
-        <a class="doc-card" href="https://github.com/zuohenlin/EchoLens2/blob/master/DEPLOYMENT.md">
+        <a class="doc-tile" href="https://github.com/zuohenlin/EchoLens2/blob/master/DEPLOYMENT.md">
           <span>Deploy</span>
-          <h2>部署指南</h2>
-          <p>覆盖 Docker Compose、本地开发、Tauri 桌面端与 Capacitor 移动端部署。</p>
+          <strong>部署指南</strong>
+          <p>Docker Compose、本地开发、Tauri 桌面端与 Capacitor 移动端部署。</p>
         </a>
-        <a class="doc-card" href="https://github.com/zuohenlin/EchoLens2/blob/master/docs/API.md">
+        <a class="doc-tile" href="https://github.com/zuohenlin/EchoLens2/blob/master/docs/API.md">
           <span>API</span>
-          <h2>接口文档</h2>
-          <p>查看后端接口、请求结构、响应字段和常见集成方式。</p>
+          <strong>接口文档</strong>
+          <p>后端接口、请求结构、响应字段和常见集成方式。</p>
         </a>
-        <a class="doc-card" href="https://github.com/zuohenlin/EchoLens2/blob/master/docs/USER_MANUAL.md">
+        <a class="doc-tile tall" href="https://github.com/zuohenlin/EchoLens2/blob/master/docs/USER_MANUAL.md">
           <span>Manual</span>
-          <h2>用户手册</h2>
+          <strong>用户手册</strong>
           <p>按业务流程了解项目创建、采集、仿真、预测、决策和报告下载。</p>
         </a>
-        <a class="doc-card" href="https://github.com/zuohenlin/EchoLens2/blob/master/docs/BRAND_GUIDE.md">
+        <a class="doc-tile" href="https://github.com/zuohenlin/EchoLens2/blob/master/docs/BRAND_GUIDE.md">
           <span>Brand</span>
-          <h2>品牌指南</h2>
+          <strong>品牌指南</strong>
           <p>统一 EchoLens 对外展示的 Logo、色彩、命名和视觉风格。</p>
         </a>
-        <a class="doc-card" href="https://github.com/zuohenlin/EchoLens2/releases/tag/v2.0.0-rc1">
+        <a class="doc-tile" href="https://github.com/zuohenlin/EchoLens2/releases/tag/v2.0.0-rc1">
           <span>Release</span>
-          <h2>客户端下载</h2>
+          <strong>客户端下载</strong>
           <p>获取当前预发布的 Windows NSIS 安装包和 Android APK。</p>
         </a>
-        <a class="doc-card" href="https://github.com/zuohenlin/EchoLens2/actions">
+        <a class="doc-tile" href="https://github.com/zuohenlin/EchoLens2/actions">
           <span>CI</span>
-          <h2>构建状态</h2>
+          <strong>构建状态</strong>
           <p>查看 CI、Docker、Build Artifacts 和 GitHub Pages 部署运行情况。</p>
         </a>
-        <a class="doc-card" href="https://github.com/zuohenlin/EchoLens2/blob/master/docs/kg-spike-report.md">
+        <a class="doc-tile" href="https://github.com/zuohenlin/EchoLens2/blob/master/docs/kg-spike-report.md">
           <span>KG</span>
-          <h2>知识图谱 Spike</h2>
-          <p>阅读图谱构建、检索增强和证据链探索相关技术记录。</p>
+          <strong>知识图谱 Spike</strong>
+          <p>图谱构建、检索增强和证据链探索相关技术记录。</p>
         </a>
-        <a class="doc-card" href="./index.html">
+        <a class="doc-tile accent" href="./index.html">
           <span>Site</span>
-          <h2>官网首页</h2>
+          <strong>官网首页</strong>
           <p>返回产品落地页，查看工作流、架构、客户端和报告能力概览。</p>
         </a>
       </section>
@@ -106,5 +121,24 @@
       <span>EchoLens 2.0 文档中心 · AGPL-3.0</span>
       <a href="./index.html">返回官网首页</a>
     </footer>
+    <script>
+      ;(() => {
+        const root = document.documentElement
+        const button = document.querySelector('[data-theme-toggle]')
+        const label = document.querySelector('[data-theme-label]')
+        const icon = document.querySelector('[data-theme-icon]')
+        const render = () => {
+          const isDark = root.dataset.theme === 'dark'
+          if (label) label.textContent = isDark ? '深色' : '浅色'
+          if (icon) icon.textContent = isDark ? '夜' : '昼'
+        }
+        button?.addEventListener('click', () => {
+          root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark'
+          localStorage.setItem('echolens-pages-theme', root.dataset.theme)
+          render()
+        })
+        render()
+      })()
+    </script>
   </body>
 </html>

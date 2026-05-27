@@ -9,221 +9,160 @@
     />
     <title>EchoLens 2.0 · 电商舆情智能体决策平台</title>
     <link rel="icon" href="./assets/logo.png" />
+    <script>
+      ;(() => {
+        const saved = localStorage.getItem('echolens-pages-theme')
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        document.documentElement.dataset.theme = saved || (prefersDark ? 'dark' : 'light')
+      })()
+    </script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body class="home-page">
     <a class="skip-link" href="#main-content">跳到主要内容</a>
-    <header class="site-header">
+
+    <header class="site-header" aria-label="站点顶部导航">
       <a class="brand" href="./index.html" aria-label="EchoLens 首页">
-        <img src="./assets/logo.png" alt="EchoLens Logo" />
+        <img src="./assets/logo.png" alt="EchoLens Logo" width="52" height="52" />
         <span>
           <strong>EchoLens 2.0</strong>
-          <small>Agentic Market Intelligence</small>
+          <small>Evidence-first Market Intelligence</small>
         </span>
       </a>
-      <nav class="nav" aria-label="主导航">
-        <a href="#workflow">流程</a>
-        <a href="#architecture">架构</a>
-        <a href="#clients">客户端</a>
-        <a href="./docs.html">文档</a>
-        <a class="nav-pill" href="https://github.com/zuohenlin/EchoLens2/releases/tag/v2.0.0-rc1">下载</a>
-      </nav>
+      <div class="header-actions">
+        <nav class="nav" aria-label="主导航">
+          <a href="#story">价值</a>
+          <a href="#workflow">流程</a>
+          <a href="#studio">工作台</a>
+          <a href="#download">下载</a>
+          <a href="./docs.html">文档</a>
+        </nav>
+        <button class="theme-toggle" type="button" aria-label="切换明暗主题" data-theme-toggle>
+          <span data-theme-icon>●</span>
+          <strong data-theme-label>Theme</strong>
+        </button>
+      </div>
     </header>
 
     <main id="main-content">
-      <section class="hero section-shell">
-        <div class="hero-copy">
-          <p class="eyebrow">电商舆情 · 群体智能 · 可追溯决策</p>
-          <h1>让市场噪声变成可验证的下一步行动。</h1>
-          <p class="hero-lead">
-            EchoLens 2.0 将真实数据采集、知识图谱、多智能体仿真、时序预测、因果推断和证据链报告串成一条闭环，帮助团队在新品上市、竞品监测和营销复盘中更早看见风险与机会。
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="https://github.com/zuohenlin/EchoLens2/releases/tag/v2.0.0-rc1">下载客户端</a>
-            <a class="button secondary" href="./docs.html">阅读文档</a>
-            <a class="button ghost" href="https://github.com/zuohenlin/EchoLens2">查看源码</a>
-          </div>
-          <div class="release-proof" aria-label="当前发布资产">
-            <span>v2.0.0-rc1</span>
-            <span>Windows NSIS</span>
-            <span>Android APK</span>
-            <span>GitHub Pages</span>
-          </div>
-          <dl class="hero-metrics" aria-label="平台指标">
-            <div>
-              <dt>6</dt>
-              <dd>采集到报告核心步骤</dd>
-            </div>
-            <div>
-              <dt>2</dt>
-              <dd>Windows / Android 客户端</dd>
-            </div>
-            <div>
-              <dt>100%</dt>
-              <dd>关键结论证据可追溯</dd>
-            </div>
-          </dl>
+      <section class="hero editorial-hero section-shell">
+        <div class="hero-kicker">
+          <span>v2.0.0-rc1</span>
+          <span>Windows / Android</span>
+          <span>AGPL-3.0</span>
         </div>
-        <div class="hero-card" aria-label="EchoLens 产品链路示意">
-          <div class="orbital-logo">
-            <img src="./assets/logo.png" alt="" />
-            <span></span><span></span><span></span>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Market signal, simulated before it becomes expensive.</p>
+            <h1>把电商噪声整理成一份能追责的行动报告。</h1>
+            <p class="hero-lead">
+              EchoLens 2.0 将商品材料、评论样本、知识图谱、多智能体仿真、预测实验和证据链报告放在同一个决策桌面里，让新品、竞品和投放复盘不再停留在截图和感觉。
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="https://github.com/zuohenlin/EchoLens2/releases/tag/v2.0.0-rc1">下载客户端</a>
+              <a class="button secondary" href="./docs.html">查看部署与手册</a>
+              <a class="button quiet" href="https://github.com/zuohenlin/EchoLens2">GitHub 源码</a>
+            </div>
           </div>
-          <div class="signal-panel">
-            <p>Decision Signal</p>
-            <strong>市场接受度 +18.6%</strong>
-            <small>来源：采集样本 · 仿真运行 · 预测实验 · 决策看板</small>
-          </div>
-          <div class="trace-list">
-            <span>RAW 评论 / 商品 / 话题</span>
-            <span>KG 实体关系抽取</span>
-            <span>OASIS Agent 仿真</span>
-            <span>因果预测与报告生成</span>
-          </div>
+
+          <aside class="report-sheet" aria-label="EchoLens 报告预览">
+            <div class="sheet-toolbar">
+              <span>Evidence Report</span>
+              <strong>Run #2049</strong>
+            </div>
+            <div class="sheet-score">
+              <p>市场接受度</p>
+              <strong>+18.6%</strong>
+              <small>采集样本 · 仿真运行 · 预测实验 · 决策看板</small>
+            </div>
+            <div class="sheet-chart" aria-hidden="true">
+              <span style="height: 46%"></span>
+              <span style="height: 72%"></span>
+              <span style="height: 58%"></span>
+              <span style="height: 88%"></span>
+              <span style="height: 64%"></span>
+            </div>
+            <dl class="sheet-facts">
+              <div><dt>强可靠性</dt><dd>关键结论绑定来源样本</dd></div>
+              <div><dt>最弱链路</dt><dd>证据不足自动标注</dd></div>
+              <div><dt>可反查</dt><dd>Run chip 回到原始记录</dd></div>
+            </dl>
+          </aside>
         </div>
       </section>
 
-      <section class="section-shell problem-section">
-        <div class="section-heading wide">
+      <section id="story" class="section-shell statement-section">
+        <div class="statement-card">
           <p class="eyebrow">Why EchoLens</p>
-          <h2>面向电商决策的三重不确定性。</h2>
-          <p>
-            电商团队每天面对评论、话题、价格、竞品、投放和用户情绪的快速变化。EchoLens 不只做数据展示，而是把数据转成可运行、可预测、可解释的决策证据。
-          </p>
+          <h2>这不是又一个数据大屏，而是一张“决策证据桌”。</h2>
         </div>
-        <div class="cards-grid compact-grid">
-          <article class="feature-card">
-            <span>Noise</span>
-            <h3>信息碎片太多</h3>
-            <p>从商品详情、评论和社媒话题中抽取实体关系，沉淀可检索的市场上下文。</p>
-          </article>
-          <article class="feature-card">
-            <span>Future</span>
-            <h3>未来走势难判断</h3>
-            <p>用多智能体传播仿真与时序预测并行评估不同营销刺激下的舆情变化。</p>
-          </article>
-          <article class="feature-card">
-            <span>Evidence</span>
-            <h3>结论依据难复核</h3>
-            <p>报告输出可靠性等级、最弱证据链和 Run 反查入口，让每条建议都能回到原始数据。</p>
-          </article>
+        <div class="statement-copy">
+          <p>
+            电商团队面对的是评论碎片、竞品价格、KOL 传播和情绪波动的组合不确定性。EchoLens 的核心设计不是堆图表，而是把每一次采集、仿真、预测和建议都串成可复核证据。
+          </p>
+          <div class="proof-row" aria-label="平台能力指标">
+            <div><strong>6</strong><span>采集到报告核心步骤</span></div>
+            <div><strong>2</strong><span>桌面与移动客户端</span></div>
+            <div><strong>100%</strong><span>关键结论证据可追溯</span></div>
+          </div>
         </div>
       </section>
 
-      <section id="workflow" class="section-shell split-section">
-        <div>
+      <section id="workflow" class="section-shell workflow-section">
+        <div class="section-heading split-heading">
           <p class="eyebrow">Workflow</p>
-          <h2>从材料上传到报告下载，一条链路完成决策闭环。</h2>
-          <p class="section-copy">
-            平台围绕“项目”组织全流程：先建立材料和采集目标，再运行仿真/预测，最后在决策看板中形成可下载报告。
-          </p>
+          <h2>从材料上传到报告下载，一条线走完。</h2>
+          <p>每个步骤都留下可追踪的运行记录，避免“看起来很合理，但无法复盘”的分析结论。</p>
         </div>
-        <ol class="timeline">
-          <li><strong>01 项目创建</strong><span>录入商品、竞品、关键词和分析目标，形成后续任务上下文。</span></li>
-          <li><strong>02 材料与采集</strong><span>上传 PDF/TXT/Markdown，并围绕电商平台与社媒话题采集样本。</span></li>
-          <li><strong>03 图谱构建</strong><span>抽取商品、品牌、卖点、KOL、评论情绪等实体关系和证据片段。</span></li>
-          <li><strong>04 仿真预测</strong><span>多智能体传播仿真与时序/因果预测并行评估结果。</span></li>
-          <li><strong>05 决策看板</strong><span>聚合收益、风险、可靠性和关键路径，支持 Run chip 反查。</span></li>
-          <li><strong>06 报告交付</strong><span>生成自包含 HTML / Markdown 报告，保留证据链和置信度摘要。</span></li>
+        <ol class="process-board">
+          <li><span>01</span><strong>项目创建</strong><p>录入商品、竞品、关键词和分析目标。</p></li>
+          <li><span>02</span><strong>材料与采集</strong><p>上传 PDF/TXT/Markdown，并采集评论与话题样本。</p></li>
+          <li><span>03</span><strong>图谱构建</strong><p>抽取品牌、卖点、KOL、情绪和证据片段。</p></li>
+          <li><span>04</span><strong>仿真预测</strong><p>用多智能体传播仿真和预测实验评估策略。</p></li>
+          <li><span>05</span><strong>决策看板</strong><p>汇总收益、风险、可靠性和关键路径。</p></li>
+          <li><span>06</span><strong>报告交付</strong><p>导出 HTML / Markdown，保留证据链与置信度。</p></li>
         </ol>
       </section>
 
-      <section id="architecture" class="section-shell architecture-section">
-        <div class="section-heading wide">
-          <p class="eyebrow">Architecture</p>
-          <h2>真实数据、智能体仿真与证据报告的组合架构。</h2>
+      <section id="studio" class="section-shell studio-section">
+        <div class="studio-copy">
+          <p class="eyebrow">Decision Studio</p>
+          <h2>工作台像一张分析师桌面：左侧是材料，右侧是结论依据。</h2>
+          <p>
+            后端 Flask API 管理项目、采集、仿真、预测、决策和报告接口；前端 Vue 3 串联业务链路；Tauri 与 Capacitor 让桌面和移动客户端共享同一套能力。
+          </p>
         </div>
-        <div class="architecture-map" aria-label="系统架构示意">
-          <div class="arch-column">
-            <span>Input</span>
-            <strong>商品材料 / 评论 / 话题</strong>
-            <small>PDF、Markdown、TXT、电商与社媒样本</small>
-          </div>
-          <div class="arch-arrow">→</div>
-          <div class="arch-column highlight">
-            <span>Engine</span>
-            <strong>Kuzu / LightRAG / OASIS</strong>
-            <small>知识图谱、检索增强、多智能体传播仿真</small>
-          </div>
-          <div class="arch-arrow">→</div>
-          <div class="arch-column">
-            <span>Output</span>
-            <strong>预测 / 决策 / 报告</strong>
-            <small>可靠性等级、因果解释、证据链下载</small>
-          </div>
-        </div>
-        <div class="cards-grid">
-          <article class="feature-card">
-            <span>Backend</span>
-            <h3>Flask API 与运行时配置</h3>
-            <p>后端管理项目、采集、仿真、预测、决策和报告接口，并支持客户端配置模型提供商参数。</p>
-          </article>
-          <article class="feature-card">
-            <span>Frontend</span>
-            <h3>Vue 3 决策工作台</h3>
-            <p>项目详情页串联全部业务链路，决策看板支持高亮追溯、可靠性标签和报告下载。</p>
-          </article>
-          <article class="feature-card">
-            <span>Native</span>
-            <h3>桌面与移动客户端</h3>
-            <p>Tauri Windows 安装包与 Capacitor Android APK 共享前端能力，并提供系统设置入口。</p>
-          </article>
+        <div class="studio-grid" aria-label="系统架构卡片">
+          <article><span>Input</span><strong>商品材料 / 评论 / 话题</strong><p>PDF、Markdown、TXT、电商与社媒样本。</p></article>
+          <article><span>Engine</span><strong>Kuzu / LightRAG / OASIS</strong><p>知识图谱、检索增强、多智能体传播仿真。</p></article>
+          <article><span>Output</span><strong>预测 / 决策 / 报告</strong><p>可靠性等级、因果解释、证据链下载。</p></article>
         </div>
       </section>
 
-      <section id="clients" class="section-shell clients-section">
-        <div class="section-heading wide">
+      <section id="download" class="section-shell download-section">
+        <div class="download-head">
           <p class="eyebrow">Clients</p>
-          <h2>客户端下载与部署形态。</h2>
-          <p>当前预发布版本已提供 Windows 与 Android 客户端；用户可在系统设置中配置后端服务地址、LLM Base URL、模型名称和 API Key。</p>
+          <h2>直接下载当前预发布客户端。</h2>
+          <p>Windows 安装器包含中文安装指引、版权说明和 EchoLens 图标；Android 提供可安装 APK。</p>
         </div>
-        <div class="download-grid">
-          <article class="download-card windows">
+        <div class="download-cards">
+          <a class="download-card windows" href="https://github.com/zuohenlin/EchoLens2/releases/download/v2.0.0-rc1/EchoLens_v2.0.0-rc1_windows_setup.exe">
             <span>Windows</span>
-            <h3>NSIS 中文安装包</h3>
-            <p>包含简体中文安装指引、版权说明、发布者信息和 EchoLens Logo 图标。</p>
-            <a class="button primary" href="https://github.com/zuohenlin/EchoLens2/releases/download/v2.0.0-rc1/EchoLens_v2.0.0-rc1_windows_setup.exe">下载 Windows 版</a>
-          </article>
-          <article class="download-card android">
+            <strong>NSIS 中文安装包</strong>
+            <small>系统设置可配置后端地址、LLM Base URL、模型名称和 API Key。</small>
+          </a>
+          <a class="download-card android" href="https://github.com/zuohenlin/EchoLens2/releases/download/v2.0.0-rc1/EchoLens_v2.0.0-rc1_android.apk">
             <span>Android</span>
-            <h3>可安装 APK</h3>
-            <p>使用预发布签名生成可安装包，并采用与桌面端一致的 EchoLens Logo 图标。</p>
-            <a class="button primary" href="https://github.com/zuohenlin/EchoLens2/releases/download/v2.0.0-rc1/EchoLens_v2.0.0-rc1_android.apk">下载 Android 版</a>
-          </article>
+            <strong>可安装 APK</strong>
+            <small>移动端共享项目、采集、仿真、决策和报告链路。</small>
+          </a>
         </div>
       </section>
 
-      <section class="section-shell evidence-section">
-        <div>
-          <p class="eyebrow">Evidence Report</p>
-          <h2>报告不是“结论截图”，而是可复核的证据包。</h2>
-        </div>
-        <div class="evidence-board">
-          <div>
-            <span class="tier strong">强可靠性</span>
-            <strong>关键结论绑定来源样本</strong>
-            <p>每条建议保留采集样本、仿真 Run、预测实验与决策指标之间的引用关系。</p>
-          </div>
-          <div>
-            <span class="tier fair">一般可靠性</span>
-            <strong>最弱链路明确标注</strong>
-            <p>当证据不足或模型不确定性较高时，报告会展示可靠性等级和风险说明。</p>
-          </div>
-          <div>
-            <span class="tier weak">弱可靠性</span>
-            <strong>便于复盘与二次采集</strong>
-            <p>团队可以从报告反查到原始运行记录，决定是否补充数据或调整仿真参数。</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-shell release-strip">
-        <div>
-          <p class="eyebrow">Release</p>
-          <h2>EchoLens v2.0.0-rc1 已发布。</h2>
-          <p>包含修复后的 Windows / Android 客户端、系统设置页面、Logo 图标和中文 Windows 安装器。</p>
-        </div>
-        <a class="button primary" href="https://github.com/zuohenlin/EchoLens2/releases/tag/v2.0.0-rc1">查看 Release</a>
+      <section class="section-shell final-cta">
+        <p class="eyebrow">Ship with evidence</p>
+        <h2>让每条建议都能回到它的原始证据。</h2>
+        <a class="button primary" href="./docs.html">从文档中心开始</a>
       </section>
     </main>
 
@@ -231,5 +170,24 @@
       <span>EchoLens 2.0 · AGPL-3.0 · GitHub Pages</span>
       <a href="./docs.html">文档中心</a>
     </footer>
+    <script>
+      ;(() => {
+        const root = document.documentElement
+        const button = document.querySelector('[data-theme-toggle]')
+        const label = document.querySelector('[data-theme-label]')
+        const icon = document.querySelector('[data-theme-icon]')
+        const render = () => {
+          const isDark = root.dataset.theme === 'dark'
+          if (label) label.textContent = isDark ? '深色' : '浅色'
+          if (icon) icon.textContent = isDark ? '夜' : '昼'
+        }
+        button?.addEventListener('click', () => {
+          root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark'
+          localStorage.setItem('echolens-pages-theme', root.dataset.theme)
+          render()
+        })
+        render()
+      })()
+    </script>
   </body>
 </html>
