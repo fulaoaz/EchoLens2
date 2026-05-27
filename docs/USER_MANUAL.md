@@ -481,8 +481,8 @@ EchoLens 2.0 是一个**电商舆情智能体仿真 + 数据预测决策平台**
 
 ### 技术支持
 
-- **GitHub Issues**：[报告 Bug 和功能请求](https://github.com/zuohenlin/EchoLens2/issues)
-- **GitHub Discussions**：[一般性讨论](https://github.com/zuohenlin/EchoLens2/discussions)
+- **GitHub Issues**：[报告 Bug 和功能请求](https://github.com/fulaoaz/EchoLens2/issues)
+- **GitHub Discussions**：[一般性讨论](https://github.com/fulaoaz/EchoLens2/discussions)
 - **邮件支持**：fulaoaz@qq.com
 - **在线文档**：[GitHub Pages](https://yourusername.github.io/echolens) *(计划中)*
 

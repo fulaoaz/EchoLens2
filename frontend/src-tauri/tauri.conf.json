@@ -30,7 +30,7 @@
     "targets": ["nsis"],
     "icon": ["icons/icon.ico"],
     "publisher": "EchoLens Team",
-    "homepage": "https://github.com/zuohenlin/EchoLens2",
+    "homepage": "https://github.com/fulaoaz/EchoLens2",
     "copyright": "Copyright © 2026 EchoLens Team. All rights reserved.",
     "license": "AGPL-3.0-only",
     "licenseFile": "LICENSE.txt",

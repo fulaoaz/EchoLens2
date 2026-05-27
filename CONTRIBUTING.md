@@ -49,7 +49,7 @@
 
 ### 报告 Bug
 
-如果您发现了 Bug，请通过 [GitHub Issues](https://github.com/zuohenlin/EchoLens2/issues) 报告。
+如果您发现了 Bug，请通过 [GitHub Issues](https://github.com/fulaoaz/EchoLens2/issues) 报告。
 
 **Bug 报告应包含**：
 
@@ -99,7 +99,7 @@
 
 ### 提出新功能
 
-如果您有新功能的想法，请先通过 [GitHub Issues](https://github.com/zuohenlin/EchoLens2/issues) 讨论。
+如果您有新功能的想法，请先通过 [GitHub Issues](https://github.com/fulaoaz/EchoLens2/issues) 讨论。
 
 **功能建议应包含**：
 
@@ -123,7 +123,7 @@
 ### 克隆仓库
 
 ```bash
-git clone https://github.com/zuohenlin/EchoLens2.git
+git clone https://github.com/fulaoaz/EchoLens2.git
 cd echolens
 ```
 

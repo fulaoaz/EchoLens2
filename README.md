@@ -8,11 +8,11 @@
 
 *让数据说话，让决策有据*
 
-[![Version](https://img.shields.io/badge/version-2.0.0--rc1-blue.svg)](https://github.com/zuohenlin/EchoLens2/releases)
+[![Version](https://img.shields.io/badge/version-2.0.0--rc1-blue.svg)](https://github.com/fulaoaz/EchoLens2/releases)
 [![License](https://img.shields.io/badge/license-AGPL--3.0-green.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
 [![Vue](https://img.shields.io/badge/vue-3.5-green.svg)](https://vuejs.org/)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/zuohenlin/EchoLens2/actions)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/fulaoaz/EchoLens2/actions)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 [English](README_EN.md) | 简体中文
@@ -318,7 +318,7 @@ causal_effect = predictor.causal_inference(
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/zuohenlin/EchoLens2.git
+git clone https://github.com/fulaoaz/EchoLens2.git
 cd echolens
 
 # 2. 配置环境变量
@@ -338,7 +338,7 @@ docker compose up -d
 #### 1️⃣ 克隆仓库
 
 ```bash
-git clone https://github.com/zuohenlin/EchoLens2.git
+git clone https://github.com/fulaoaz/EchoLens2.git
 cd echolens
 ```
 
@@ -674,7 +674,7 @@ sequenceDiagram
 
 ### 🐛 报告 Bug
 
-发现 Bug？请通过 [GitHub Issues](https://github.com/zuohenlin/EchoLens2/issues) 报告，并提供：
+发现 Bug？请通过 [GitHub Issues](https://github.com/fulaoaz/EchoLens2/issues) 报告，并提供：
 
 - 清晰的标题和描述
 - 复现步骤
@@ -684,7 +684,7 @@ sequenceDiagram
 
 ### 💡 功能建议
 
-有新功能的想法？请通过 [GitHub Issues](https://github.com/zuohenlin/EchoLens2/issues) 提出，并说明：
+有新功能的想法？请通过 [GitHub Issues](https://github.com/fulaoaz/EchoLens2/issues) 提出，并说明：
 
 - 功能描述
 - 使用场景
@@ -727,13 +727,13 @@ sequenceDiagram
 
 ### 💬 社区
 
-- **GitHub Issues**: [报告 Bug 和功能请求](https://github.com/zuohenlin/EchoLens2/issues)
-- **GitHub Discussions**: [一般性讨论和问题](https://github.com/zuohenlin/EchoLens2/discussions)
+- **GitHub Issues**: [报告 Bug 和功能请求](https://github.com/fulaoaz/EchoLens2/issues)
+- **GitHub Discussions**: [一般性讨论和问题](https://github.com/fulaoaz/EchoLens2/discussions)
 - **邮件支持**: fulaoaz@qq.com
 
 ### 🔗 链接
 
-- **项目仓库**: [GitHub](https://github.com/zuohenlin/EchoLens2)
+- **项目仓库**: [GitHub](https://github.com/fulaoaz/EchoLens2)
 - **在线文档**: [GitHub Pages](https://yourusername.github.io/echolens) *(计划中)*
 - **官方网站**: *计划中*
 - **社区论坛**: *计划中*
@@ -781,18 +781,18 @@ EchoLens 2.0 的开发离不开以下优秀的开源项目：
 
 ## 📊 项目统计
 
-![GitHub stars](https://img.shields.io/github/stars/zuohenlin/EchoLens2?style=social)
-![GitHub forks](https://img.shields.io/github/forks/zuohenlin/EchoLens2?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/zuohenlin/EchoLens2?style=social)
+![GitHub stars](https://img.shields.io/github/stars/fulaoaz/EchoLens2?style=social)
+![GitHub forks](https://img.shields.io/github/forks/fulaoaz/EchoLens2?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/fulaoaz/EchoLens2?style=social)
 
-![GitHub issues](https://img.shields.io/github/issues/zuohenlin/EchoLens2)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/zuohenlin/EchoLens2)
-![GitHub contributors](https://img.shields.io/github/contributors/zuohenlin/EchoLens2)
-![GitHub last commit](https://img.shields.io/github/last-commit/zuohenlin/EchoLens2)
+![GitHub issues](https://img.shields.io/github/issues/fulaoaz/EchoLens2)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/fulaoaz/EchoLens2)
+![GitHub contributors](https://img.shields.io/github/contributors/fulaoaz/EchoLens2)
+![GitHub last commit](https://img.shields.io/github/last-commit/fulaoaz/EchoLens2)
 
-![GitHub code size](https://img.shields.io/github/languages/code-size/zuohenlin/EchoLens2)
-![GitHub repo size](https://img.shields.io/github/repo-size/zuohenlin/EchoLens2)
-![Lines of code](https://img.shields.io/tokei/lines/github/zuohenlin/EchoLens2)
+![GitHub code size](https://img.shields.io/github/languages/code-size/fulaoaz/EchoLens2)
+![GitHub repo size](https://img.shields.io/github/repo-size/fulaoaz/EchoLens2)
+![Lines of code](https://img.shields.io/tokei/lines/github/fulaoaz/EchoLens2)
 
 ---
 
@@ -800,7 +800,7 @@ EchoLens 2.0 的开发离不开以下优秀的开源项目：
 
 **EchoLens 2.0** - 让数据说话，让决策有据
 
-Made with ❤️ by [EchoLens Team](https://github.com/zuohenlin/EchoLens2)
+Made with ❤️ by [EchoLens Team](https://github.com/fulaoaz/EchoLens2)
 
 ⭐ 如果这个项目对您有帮助，请给我们一个 Star！
 

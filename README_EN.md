@@ -4,7 +4,7 @@
 
 **E-commerce Sentiment Agent Simulation + Data Prediction & Decision Platform**
 
-[![Version](https://img.shields.io/badge/version-2.0.0--rc1-blue.svg)](https://github.com/zuohenlin/EchoLens2)
+[![Version](https://img.shields.io/badge/version-2.0.0--rc1-blue.svg)](https://github.com/fulaoaz/EchoLens2)
 [![License](https://img.shields.io/badge/license-AGPL--3.0-green.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
 [![Vue](https://img.shields.io/badge/vue-3.5-green.svg)](https://vuejs.org/)
@@ -76,7 +76,7 @@ EchoLens 2.0 is an intelligent decision platform for e-commerce sentiment analys
 #### 1. Clone Repository
 
 ```bash
-git clone https://github.com/zuohenlin/EchoLens2.git
+git clone https://github.com/fulaoaz/EchoLens2.git
 cd echolens
 ```
 
@@ -287,13 +287,13 @@ For detailed license terms, please refer to the [LICENSE](LICENSE) file.
 
 ## 📧 Contact
 
-- **Issue Tracker**: [GitHub Issues](https://github.com/zuohenlin/EchoLens2/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/zuohenlin/EchoLens2/discussions)
+- **Issue Tracker**: [GitHub Issues](https://github.com/fulaoaz/EchoLens2/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/fulaoaz/EchoLens2/discussions)
 - **Email Support**: fulaoaz@qq.com
 
 ### 🔗 Links
 
-- **Repository**: [GitHub](https://github.com/zuohenlin/EchoLens2)
+- **Repository**: [GitHub](https://github.com/fulaoaz/EchoLens2)
 - **Documentation**: [GitHub Pages](https://yourusername.github.io/echolens) *(Planned)*
 - **Official Website**: *Planned*
 - **Community Forum**: *Planned*

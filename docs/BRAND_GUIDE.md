@@ -387,7 +387,7 @@ frontend/ios/App/App/Assets.xcassets/
 如有品牌使用相关问题，请联系：
 
 - **邮件**：fulaoaz@qq.com
-- **GitHub**：https://github.com/zuohenlin/EchoLens2
+- **GitHub**：https://github.com/fulaoaz/EchoLens2
 
 ---
 

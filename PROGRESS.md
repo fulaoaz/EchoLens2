@@ -390,13 +390,13 @@ graph LR
 
 ## 📧 联系方式
 
-- **GitHub Issues**: [报告 Bug 和功能请求](https://github.com/zuohenlin/EchoLens2/issues)
-- **GitHub Discussions**: [一般性讨论](https://github.com/zuohenlin/EchoLens2/discussions)
+- **GitHub Issues**: [报告 Bug 和功能请求](https://github.com/fulaoaz/EchoLens2/issues)
+- **GitHub Discussions**: [一般性讨论](https://github.com/fulaoaz/EchoLens2/discussions)
 - **邮件支持**: fulaoaz@qq.com
 
 ### 🔗 链接
 
-- **项目仓库**: [GitHub](https://github.com/zuohenlin/EchoLens2)
+- **项目仓库**: [GitHub](https://github.com/fulaoaz/EchoLens2)
 - **在线文档**: [GitHub Pages](https://yourusername.github.io/echolens) *(计划中)*
 - **官方网站**: *计划中*
 - **社区论坛**: *计划中*
